@@ -7,3 +7,10 @@
     padding: 0;
     box-sizing: border-box;
 }
+
+a,
+.router-link-active.router-link-exact-active{
+    color: inherit;
+    text-decoration: none;
+}
+

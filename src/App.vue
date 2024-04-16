@@ -1,6 +1,9 @@
 <template>
     <div>
-        <SideMenu/>
+        <router-view>
+
+        </router-view>
+        
     </div>
 
 </template>
@@ -8,11 +11,14 @@
 <script>
     import axios from 'axios'
     import { store } from './store'
-    import SideMenu from "./components/SideMenu.vue"
+    import HomePage from './pages/HomePage.vue';
+    import RealHomePage from './pages/RealHomePage.vue';
+    
     
     export default {
         components: {
-            SideMenu
+            HomePage,
+            RealHomePage
         },
         data() {
             return{

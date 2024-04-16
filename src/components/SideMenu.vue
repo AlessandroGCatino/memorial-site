@@ -5,7 +5,10 @@
             <div class="leftspace"></div>
             <div class="content">
                 <div class="top-content">
-                    <h5>Holocaust Centre North</h5>
+                    <a href="/home">
+                        <h5>Holocaust Centre North</h5>
+
+                    </a>
                 </div>
 
             </div>
@@ -19,7 +22,7 @@
 <script>
 export default {
     name: "SideMenu",
-    setup () {
+    data () {
         return {
 
         }
