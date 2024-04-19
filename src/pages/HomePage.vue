@@ -1,16 +1,20 @@
 <template>
-    <div>
+    <div class="d-flex">
         <SideMenu/>
+        <MainContent/>
+
     </div>
 </template>
 
 <script>
 import SideMenu from '@/components/SideMenu.vue';
+import MainContent from '@/components/MainContent.vue';
 
     export default {
         name: "HomePage",
         components: {
-            SideMenu
+            SideMenu,
+            MainContent
         }
     }
 </script>
