@@ -10,14 +10,20 @@
                         <h5>Holocaust Centre North</h5>
                     </a>
                 </div>
-                
-                <div class="sections" v-for="(element) in store.sections">
-                    <h6>{{ element.name }}</h6>
-                    <div v-for="item in element.list" :key="item.id">
-                        <span @click="changeCurrentArticle(element.section_id, item.list_id)">{{ item.title }}</span>
+
+                <div class="scrollable">
+
+                    <div class="sections" v-for="(element) in store.sections">
+                        <h6>{{ element.name }}</h6>
+                        <div v-for="item in element.list" :key="item.id">
+                            <span @click="changeCurrentArticle(element.section_id, item.list_id)">{{ item.title }}</span>
+                        </div>
                     </div>
+                    <div class="bottom">
+                        Lorem ipsum dolor sit amet.
+                    </div>
+                    
                 </div>
-                
             </div>
             <div class="top-rightspace"></div>
             <div class="bot-rightspace"></div>
@@ -50,6 +56,12 @@ export default {
 
 <style lang="scss" scoped>
 
+    .bottom{
+        height: 700px;
+        display: flex;
+        align-items: end;
+    }
+
     span{
         cursor: pointer;
     }
@@ -68,14 +80,19 @@ export default {
             .content{
                 height: 100%;
                 padding: 0 15px;
-                overflow: auto;
+                .scrollable{
+                    overflow: auto;
+                    height: calc(100% - 63px);
+                }
 
                 .top-content{
                     padding: 15px 0;
+                    border-bottom: 1px solid black;
+
                 }
 
                 .sections{
-                    border-top: 1px solid black;
+                    border-bottom: 1px solid black;
                     padding-top: 5px;
                     padding-bottom: 20px;
                 }

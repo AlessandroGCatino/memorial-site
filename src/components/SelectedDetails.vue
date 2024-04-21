@@ -1,6 +1,6 @@
 <template>
     <div class="content-container">
-        <div class="top-images">
+        <div class="top-images ">
             <figure>
                 <img :src="topRImg" alt="">
             </figure>
@@ -64,6 +64,7 @@ export default {
     .top-images{
         padding-top: 15px;
         display: flex;
+        justify-content: space-between;
         gap: 15px;
 
         border-bottom: 1px solid black;
