@@ -1,25 +1,38 @@
 <template>
-    <div>
-        <div class="text-center">
-            <h1>
-                Questa sarà la pagina con le immagini fluttuanti
-            </h1>
-        </div>
-        <div>
+    <div class="d-flex">
 
-        </div>
-        <a ref="move" id="test" style="position: absolute; top: 150px; left: 50px;" href="/" class="btn btn-primary " >
-            Torna alla Home
+        <SideMenu/>
+        <MainContent/>
+    </div>
+
+    
+
+        <!-- <div class="text-center">
+            <h1>
+                This will be the page with moving images
+            </h1>
+        </div> -->
+        
+        <a ref="move" id="test" style="position: absolute; top: 150px; left: 150px;" href="/" class="btn btn-primary " >
+            Back to Index
         </a>
 
-        <div ref="move2" id="test" style="position: absolute; top: 150px; left: 800px;" class="btn btn-warning">Altro Elemento</div>
-    </div>
+        <div ref="move2" id="test" style="position: absolute; top: 150px; left: 1200px;" class="btn btn-warning">
+            Other Element
+        </div>
+    
 </template>
 
 <script>
+import SideMenu from '@/components/SideMenu2.vue';
+import MainContent from '@/components/MainContent2.vue';
 
     export default {
         name: "RealHomePage",
+        components: {
+            SideMenu,
+            MainContent
+        },
         data() {
             return {
                 el: "#app",

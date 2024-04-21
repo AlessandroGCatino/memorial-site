@@ -2,10 +2,10 @@
     <div class="content-container">
         <div class="top-images ">
             <figure>
-                <img :src="topRImg" alt="">
+                <img :src="topRImg" alt="" class="">
             </figure>
             <figure>
-                <img :src="topLImg" alt="">
+                <img :src="topLImg" alt="" class="">
             </figure>
         </div>
         <div class="description">
@@ -70,8 +70,11 @@ export default {
         border-bottom: 1px solid black;
         figure{
             background-color: lightgrey;
-            width: calc(100%/2 - 15px);
+            width: calc(100%/2 - 7.5px);
             aspect-ratio: 1/1;
+            img{
+                width: 100%;
+            }
         }
     }
     .bot-images{
