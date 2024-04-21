@@ -11,7 +11,7 @@
         <div class="description">
             <h6 class="d-inline">{{ title }}</h6> , <h6 class="d-inline">{{ artist }}</h6>
             <h6>{{ year }}</h6>
-            <p class="pt-3 ">
+            <p class="descriptions">
                 {{ desc }}
             </p>
         </div>
@@ -24,7 +24,7 @@
             </figure>
         </div>
         <div class="description bot-description">
-            <p class="pt-3 ">
+            <p class="descriptions">
                 {{ secondDesc }}
             </p>
         </div>
@@ -58,6 +58,9 @@ export default {
 <style lang="scss" scoped>
 
 
+.descriptions{
+    padding-top: 13px;
+}
 
 .content-container{
     height: 100%;
@@ -82,7 +85,7 @@ export default {
         border-top: 1px solid black;
     }
     .description{
-        padding-top: 15px;
+        padding-top: 13px;
     }
     .bot-description{
         padding-top: 0;
