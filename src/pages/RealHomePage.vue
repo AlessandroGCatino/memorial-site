@@ -17,8 +17,16 @@
             Back to Index
         </a>
 
-        <div ref="move2" id="test" style="position: absolute; top: 150px; left: 1200px;" class="btn btn-warning">
-            Other Element
+        <div ref="move2" style="position: absolute; top: 150px; left: 1200px;" class="moving-objects">
+            <figure>
+                <img src="../assets/img/Ariane - Yellow Clock - Canvas, organza, clock_2021(1).png" alt="">
+            </figure>
+        </div>
+
+        <div ref="move3" style="position: absolute; top: 550px; left: 1200px;" class="moving-objects">
+            <figure>
+                <img src="../assets/img/catalog_Irina_22_print7.png" alt="">
+            </figure>
         </div>
     
 </template>
@@ -39,7 +47,8 @@ import MainContent from '@/components/MainContent2.vue';
                 mousePosition: "",
                 offset: [0,0],
                 isDown1: false,
-                isDown2: false
+                isDown2: false,
+                isDown3: false
             }
         },
         methods: {
@@ -74,15 +83,28 @@ import MainContent from '@/components/MainContent2.vue';
                 console.log("Preso", vueDatas.isDown2, vueDatas.offset, e.clientX)
             }, true);
 
+            // terzo pulsante
+            
+            this.$refs.move3.addEventListener('mousedown', function(e){
+                e.preventDefault();
+                vueDatas.isDown3 = true;
+                let lOffset = this.offsetLeft;
+                let tOffset = this.offsetTop
+                vueDatas.offset = [lOffset - e.clientX,tOffset - e.clientY];
+                console.log("Preso", vueDatas.isDown3, vueDatas.offset, e.clientX)
+            }, true);
+
             document.addEventListener('mouseup', function() {
                 vueDatas.isDown1 = false;
                 vueDatas.isDown2 = false;
+                vueDatas.isDown3 = false;
                 console.log("lasciato", vueDatas.isDown1)
 
             }, true);
 
             this.$refs.move.addEventListener('click', listener)
             this.$refs.move2.addEventListener('click', listener)
+            this.$refs.move3.addEventListener('click', listener)
 
 
 
@@ -103,7 +125,7 @@ import MainContent from '@/components/MainContent2.vue';
                 }         
             }, true)
 
-            // secondo pulsante
+            // second image
             vueDatas.$refs.move2.addEventListener('click', function(e){
                 clicks++;
                 if (clicks === 1) {
@@ -113,6 +135,21 @@ import MainContent from '@/components/MainContent2.vue';
                 } else {
                     clearTimeout(timer);
                     vueDatas.$refs.move2.removeEventListener("click", listener)
+                    console.log("entrato")
+                    clicks = 0;
+                }         
+            }, true)
+
+            // third image
+            vueDatas.$refs.move3.addEventListener('click', function(e){
+                clicks++;
+                if (clicks === 1) {
+                    timer = setTimeout( () => {
+                    clicks = 0
+                    }, 200);
+                } else {
+                    clearTimeout(timer);
+                    vueDatas.$refs.move3.removeEventListener("click", listener)
                     console.log("entrato")
                     clicks = 0;
                 }         
@@ -144,12 +181,34 @@ import MainContent from '@/components/MainContent2.vue';
                     vueDatas.$refs.move2.style.left = (vueDatas.mousePosition.x + vueDatas.offset[0]) + 'px';
                     vueDatas.$refs.move2.style.top  = (vueDatas.mousePosition.y + vueDatas.offset[1]) + 'px';
                 }
+                if (vueDatas.isDown3) {
+                    console.log("mi sposto nell'if")
+                    
+                    vueDatas.mousePosition = {
+
+                        x : e.clientX,
+                        y : e.clientY
+
+                    };
+                    vueDatas.$refs.move3.style.left = (vueDatas.mousePosition.x + vueDatas.offset[0]) + 'px';
+                    vueDatas.$refs.move3.style.top  = (vueDatas.mousePosition.y + vueDatas.offset[1]) + 'px';
+                }
             }, true);
         },   
     }
 </script>
 
 <style lang="scss" scoped>
+
+.moving-objects{
+    cursor: pointer;
+    figure{
+        width: 150px;
+        img{
+            width: 100%;
+        }
+    }
+}
 
 // .moving{
 //     position: absolute;
