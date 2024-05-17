@@ -44,6 +44,15 @@ a,
     src: local("Agrandir"), url("@/fonts/Agrandir/PPAgrandir-Regular.woff2") format("woff2"), url("@/fonts/Agrandir/PPAgrandir-Regular.woff") format("woff");
   }
 
+  @font-face {
+    font-family: "Times";
+    font-weight: 400;
+    font-style: normal;
+    font-display: auto;
+    unicode-range: U+000-5FF;
+    src: local("Agrandir"), url("@/fonts/Times/TimesLTStd-Roman.woff2") format("woff2"), url("@/fonts/Times/TimesLTStd-Roman.woff") format("woff");
+  }
+
 html,
 body{
     font: 17px/20px PPAgrandir;    
