@@ -1,33 +1,39 @@
 <template>
-    <div class="content-container">
-        <div class="top-images">
-            <figure id="artistImage" ref="artistImage">
-                <img :src="`${store.apiBase}storage/${store.infos[store.selected.section].exhibitions[store.selected.exhibition].artists[store.selected.artist].coverImage}`" alt="" class="">
-            </figure>
+    <div class="container content-container">
+        <div class="row top-images">
+            <div class="col-12">
+                <figure id="artistImage" ref="artistImage">
+                    <img :src="`${store.apiBase}storage/${store.infos[store.selected.section].exhibitions[store.selected.exhibition].artists[store.selected.artist].coverImage}`" @load="scrollToImage" alt="" class="img-fluid">
+                </figure>
+            </div>
         </div>
-        <div class="description">
-            <h6><b>{{ store.infos[store.selected.section].exhibitions[store.selected.exhibition].artists[store.selected.artist].artistName }}</b></h6>
-            <h6><b>{{ store.infos[store.selected.section].exhibitions[store.selected.exhibition].expositionDates }}</b></h6>
-            <p class="artistDesc">{{ store.infos[store.selected.section].exhibitions[store.selected.exhibition].artists[store.selected.artist].artistDesc }}</p>
+        <div class="row description">
+            <div class="col-12">
+                <h6><b>{{ store.infos[store.selected.section].exhibitions[store.selected.exhibition].artists[store.selected.artist].artistName }}</b></h6>
+                <h6><b>{{ store.infos[store.selected.section].exhibitions[store.selected.exhibition].expositionDates }}</b></h6>
+                <p class="artistDesc">{{ store.infos[store.selected.section].exhibitions[store.selected.exhibition].artists[store.selected.artist].artistDesc }}</p>
+            </div>
         </div>
         
-        <div v-for="element in store.infos[store.selected.section].exhibitions[store.selected.exhibition].artists[store.selected.artist].articles" :key="element.id">
-            <figure class="text-center">
-                <img :src="`${store.apiBase}storage/${element.operaPicture}`" alt="" class="">
-            </figure>
-            <div class="description">
+        <div class="row" v-for="element in store.infos[store.selected.section].exhibitions[store.selected.exhibition].artists[store.selected.artist].articles" :key="element.id">
+            <div class="col-12 text-center">
+                <figure>
+                    <img :src="`${store.apiBase}storage/${element.operaPicture}`" alt="" class="img-fluid">
+                </figure>
+            </div>
+            <div class="col-12 description">
                 <h6><b>{{ element.operaName }}</b>, <b>{{ store.infos[store.selected.section].exhibitions[store.selected.exhibition].artists[store.selected.artist].artistName }}</b></h6>
                 <h6><b>{{ element.operaYear }}</b></h6>
                 <p class="artistDesc"><i>{{ element.operaMaterial }}</i></p>
                 <p class="artistDesc">{{ element.operaDescription }}</p>
             </div>
-            <div v-if="element.pictures" class="extra-imgs">
-                <figure v-for="items in element.pictures">
-                    <img :src="`${store.apiBase}storage/${items.singlePicture}`" alt="" class="">
-                </figure>
-
+            <div class="col-12 extra-imgs" v-if="element.pictures">
+                <div class="d-flex flex-wrap gap-3">
+                    <figure v-for="items in element.pictures" :key="items.singlePicture" class="col-6">
+                        <img :src="`${store.apiBase}storage/${items.singlePicture}`" alt="" class="img-fluid">
+                    </figure>
+                </div>
             </div>
-
         </div>
     </div>
 </template>
@@ -46,7 +52,12 @@ export default {
         }
     },
     methods:{
-        
+        scrollToImage(){
+            this.$refs.artistImage.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
+        }
+    },
+    watch: {
+    
     },
     mounted () {
         

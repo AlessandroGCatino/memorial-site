@@ -9,7 +9,8 @@ export const store = reactive({
     apiUrl: 'http://127.0.0.1:8000/api/memorial-gestures',
     apiBase: 'http://127.0.0.1:8000/',
     infos:[],
-    dataReady: false
+    dataReady: false,
+    hcnActive: true,
 
     // sections: [
     //     {
