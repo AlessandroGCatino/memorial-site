@@ -1,32 +1,33 @@
 <template>
     <div class="content-container">
-        <div class="top-images ">
-            <figure>
-                <img :src="topRImg" alt="" class="">
-            </figure>
-            <figure>
-                <img :src="topLImg" alt="" class="">
+        <div class="top-images">
+            <figure id="artistImage" ref="artistImage">
+                <img :src="`${store.apiBase}storage/${store.infos[store.selected.section].exhibitions[store.selected.exhibition].artists[store.selected.artist].coverImage}`" alt="" class="">
             </figure>
         </div>
         <div class="description">
-            <h6 class="d-inline">{{ title }}</h6> , <h6 class="d-inline">{{ artist }}</h6>
-            <h6>{{ year }}</h6>
-            <p class="descriptions">
-                {{ desc }}
-            </p>
+            <h6><b>{{ store.infos[store.selected.section].exhibitions[store.selected.exhibition].artists[store.selected.artist].artistName }}</b></h6>
+            <h6><b>{{ store.infos[store.selected.section].exhibitions[store.selected.exhibition].expositionDates }}</b></h6>
+            <p class="artistDesc">{{ store.infos[store.selected.section].exhibitions[store.selected.exhibition].artists[store.selected.artist].artistDesc }}</p>
         </div>
-        <div v-if="botLImg && botRImg" class="top-images bot-images">
-            <figure v-if="botLImg">
-                <img :src="botLImg" alt="">
+        
+        <div v-for="element in store.infos[store.selected.section].exhibitions[store.selected.exhibition].artists[store.selected.artist].articles" :key="element.id">
+            <figure class="text-center">
+                <img :src="`${store.apiBase}storage/${element.operaPicture}`" alt="" class="">
             </figure>
-            <figure v-if="botRImg">
-                <img :src="botRImg" alt="">
-            </figure>
-        </div>
-        <div class="description bot-description">
-            <p class="descriptions">
-                {{ secondDesc }}
-            </p>
+            <div class="description">
+                <h6><b>{{ element.operaName }}</b>, <b>{{ store.infos[store.selected.section].exhibitions[store.selected.exhibition].artists[store.selected.artist].artistName }}</b></h6>
+                <h6><b>{{ element.operaYear }}</b></h6>
+                <p class="artistDesc"><i>{{ element.operaMaterial }}</i></p>
+                <p class="artistDesc">{{ element.operaDescription }}</p>
+            </div>
+            <div v-if="element.pictures" class="extra-imgs">
+                <figure v-for="items in element.pictures">
+                    <img :src="`${store.apiBase}storage/${items.singlePicture}`" alt="" class="">
+                </figure>
+
+            </div>
+
         </div>
     </div>
 </template>
@@ -36,45 +37,54 @@ import { store } from '../store';
 
 export default {
     name: "SelectedDetails",
-    props: {
-        topRImg: String,
-        topLImg: String,
-        title: String,
-        artist: String,
-        year: Number,
-        desc: String,
-        botLImg: String,
-        botRImg: String,
-        secondDesc: String
-    },
+    props: [
+        'artist'
+    ],
     data () {
         return {
-            store
+            store,
         }
-    }
+    },
+    methods:{
+        
+    },
+    mounted () {
+        
+    },
 }
 </script>
 
 <style lang="scss" scoped>
 
 
+.extra-imgs{
+    display: flex;
+    padding-bottom: 15px;
+    gap: 15px;
+    figure{
+        width: calc(100%/2 - 15px);
+        img{
+            width: 100%;
+        }
+    }
+    border-bottom: 1px solid black;
+    margin-bottom: 15px;
+}
+
 .descriptions{
     padding-top: 13px;
 }
 
-.content-container{
-    height: 100%;
-    .top-images{
-        padding-top: 15px;
-        display: flex;
-        justify-content: space-between;
-        gap: 15px;
+.artistDesc{
+    margin-top: 20px;
+}
 
-        border-bottom: 1px solid black;
+.content-container{
+    height: calc(100% - 75px);
+    .top-images{
+
         figure{
-            background-color: lightgrey;
-            width: calc(100%/2 - 7.5px);
-            aspect-ratio: 1/1;
+            width: 100%;
             img{
                 width: 100%;
             }

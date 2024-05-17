@@ -6,7 +6,7 @@
             <div class="bot-leftspace"></div>
             <div class="content d-flex flex-column justify-content-between ">
                 <div class="top-content">
-                    <a href="/home">
+                    <a href="/">
                         <h5>Holocaust Centre North</h5>
                     </a>
                 </div>
