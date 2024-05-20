@@ -37,8 +37,8 @@
 </template>
 
 <script>
-import SideMenu from '@/components/SideMenu2.vue';
-import MainContent from '@/components/MainContent2.vue';
+import SideMenu from '@/components/SideMenu.vue';
+import MainContent from '@/components/MainContent.vue';
 
     export default {
         name: "RealHomePage",

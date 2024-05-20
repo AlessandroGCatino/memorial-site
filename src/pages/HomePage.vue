@@ -33,8 +33,11 @@ export default {
         getDatas() {
             axios.get(`${store.apiUrl}`).then(response => {
                 store.infos = response.data.sections;
+                store.openCall = response.data.openCall;
                 console.log("Intero array: ", store.infos);
                 console.log("Exhibition: ", store.infos[0].exhibitions)
+                console.log("Open Call: ", store.openCall);
+
                 store.dataReady = true
                 console.log(store.infos[store.selected.section].exhibitions[store.selected.exhibition])
             });

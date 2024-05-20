@@ -3,7 +3,7 @@
 
         <div class="content">
 
-            <div v-if="store.dataReady" v-for="(artists, index) in store.infos[store.selected.section].exhibitions[store.selected.exhibition].artists" :key="artists.id">
+            <div v-if="store.dataReady" v-for="(artists, index) in store.infos[store.selected.section]?.exhibitions[store.selected.exhibition]?.artists" :key="artists.id">
                 <figure class="w-100">
                     <a>
                         <img class="img-fluid" :src="`${store.apiBase}storage/${artists.coverImage}`" @click="changeCurrentArtist(index)" alt="">
@@ -46,6 +46,8 @@ export default {
     figure{
         margin-bottom: 15px;
         cursor: pointer;
+        aspect-ratio: 1/1;
+        overflow: hidden;
     }
 
     span{

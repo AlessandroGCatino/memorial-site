@@ -1,13 +1,13 @@
 <template>
-    <div class="container content-container">
-        <div class="row top-images">
+    <div class="content-container">
+        <div class=" top-images">
             <div class="col-12">
                 <figure id="artistImage" ref="artistImage">
                     <img :src="`${store.apiBase}storage/${store.infos[store.selected.section].exhibitions[store.selected.exhibition].artists[store.selected.artist].coverImage}`" @load="scrollToImage" alt="" class="img-fluid">
                 </figure>
             </div>
         </div>
-        <div class="row description">
+        <div class=" description">
             <div class="col-12">
                 <h6><b>{{ store.infos[store.selected.section].exhibitions[store.selected.exhibition].artists[store.selected.artist].artistName }}</b></h6>
                 <h6><b>{{ store.infos[store.selected.section].exhibitions[store.selected.exhibition].expositionDates }}</b></h6>
@@ -15,10 +15,10 @@
             </div>
         </div>
         
-        <div class="row" v-for="element in store.infos[store.selected.section].exhibitions[store.selected.exhibition].artists[store.selected.artist].articles" :key="element.id">
+        <div class="" v-for="element in store.infos[store.selected.section].exhibitions[store.selected.exhibition].artists[store.selected.artist].articles" :key="element.id">
             <div class="col-12 text-center">
                 <figure>
-                    <img :src="`${store.apiBase}storage/${element.operaPicture}`" alt="" class="img-fluid">
+                    <img :src="`${store.apiBase}storage/${element.operaPicture}`" alt="" class="w-100">
                 </figure>
             </div>
             <div class="col-12 description">
@@ -28,9 +28,9 @@
                 <p class="artistDesc">{{ element.operaDescription }}</p>
             </div>
             <div class="col-12 extra-imgs" v-if="element.pictures">
-                <div class="d-flex flex-wrap gap-3">
+                <div class="d-flex flex-wrap">
                     <figure v-for="items in element.pictures" :key="items.singlePicture" class="col-6">
-                        <img :src="`${store.apiBase}storage/${items.singlePicture}`" alt="" class="img-fluid">
+                        <img :src="`${store.apiBase}storage/${items.singlePicture}`" alt="" class="w-100">
                     </figure>
                 </div>
             </div>
@@ -67,18 +67,25 @@ export default {
 
 <style lang="scss" scoped>
 
+// description in Times
+
 
 .extra-imgs{
-    display: flex;
+    
     padding-bottom: 15px;
-    gap: 15px;
+
+    &>div{
+        display: flex;
+        justify-content: space-between;
+        gap: 15px;
+
+    }
     figure{
-        width: calc(100%/2 - 15px);
+        width: calc(100%/2 - 7.5px);
         img{
             width: 100%;
         }
     }
-    border-bottom: 1px solid black;
     margin-bottom: 15px;
 }
 

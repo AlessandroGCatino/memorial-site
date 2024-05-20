@@ -5,9 +5,12 @@
             <div class="scrollable">
 
                 <div class="sections" v-for="(element, indice) in store.infos">
-                    <h6><strong>{{ element.name }}</strong></h6>
-                    <div v-for="(item, index) in element.exhibitions" :key="item.id">
-                        <span @click="changeCurrentArticle(indice, index)">{{ item.title }}</span>
+                    <h6 data-bs-toggle="collapse" :data-bs-target="`#collapse${indice}`" aria-expanded="false" :aria-controls="`#collapse${indice}`"><strong>{{ element.name }}</strong></h6>
+                    <div class="collapse" :id="`collapse${indice}`">
+
+                        <div v-for="(item, index) in element.exhibitions" :key="item.id">
+                            <span @click="changeCurrentArticle(indice, index)">{{ item.title }}</span>
+                        </div>
                     </div>
                 </div>
 
@@ -33,6 +36,8 @@ export default {
             store.selected.section = sectionid;
             store.selected.exhibition = exhibitionid;
             store.selected.artist = 0;
+            store.hcnActive=false;
+            store.openCallActive=false;
             console.log("Section: ", store.selected.section)
             console.log("Article: ", store.selected.exhibition)
         }
@@ -48,7 +53,8 @@ export default {
         align-items: end;
     }
 
-    span{
+    span,
+    h6{
         cursor: pointer;
     }
     .mg-sidebar{
@@ -64,16 +70,9 @@ export default {
             height: calc(100% - 63px);
         }
 
-        .top-content{
-            padding: 15px 0;
-            border-bottom: 1px solid black;
-
-        }
-
-        .sections{
-            border-bottom: 1px solid black;
+        .sections:first-of-type{
             padding-top: 13.5px;
-            padding-bottom: 15px;
+            // padding-bottom: 15px;
         }
     }
     .top-leftspace,

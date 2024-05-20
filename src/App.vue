@@ -4,28 +4,32 @@
             <div class="d-flex">
                 <div class="col-3 default-padding d-flex align-items-center menu-section border-end border-black position-relative">
                     <div class="left-space"></div>
-                    <RouterLink :to="{ name: 'home' }">
-                        <h5>Memorial Gestures</h5>
+                    <RouterLink :to="{ name: 'home' } " @click="changehcnActive()">
+                        <h6>Memorial Gestures</h6>
                     </RouterLink>
                     <div class="right-space"></div>
                 </div>
                 <div class="col-3 default-padding d-flex align-items-center menu-section border-end border-black position-relative">
                     <div class="left-space"></div>
-                    <h5>About Us</h5>
+                    <RouterLink :to="{ name: 'home' }" @click="changehcnActive()">
+                        <h6 @click="changehcnActive()">About Us</h6>
+                    </RouterLink>
                     <div class="right-space"></div>
                 </div>
                 <div class="d-flex col-6 justify-content-between menu-section position-relative">
                     <div class="default-padding d-flex align-items-center">
                         <div class="left-space"></div>
-                        <RouterLink :to="{ name: 'homepage' }">
-                            <h5>Holocaust Centre North</h5>
+                        <RouterLink :to="{ name: 'homepage' }" @click="changehcnActive()">
+                            <h6>Holocaust Centre North</h6>
                         </RouterLink>
                         <div class="right-space"></div>
                     </div>
-                    <div class="default-padding">
+                    <div class="default-padding" id="top-definer">
                         <div class="left-space"></div>
                         <div class="bg-black">
-                            <h5 class="text-white ">OPEN CALL</h5>
+                            <RouterLink :to="{ name: 'home' } ">
+                                <h6 @click="changeOpencallActive()" class="text-white">OPEN CALL</h6>
+                            </RouterLink>
                         </div>
                         <div class="right-space"></div>
                     </div>
@@ -42,13 +46,13 @@
             <div class="d-flex">
                 <div class="col-3 default-padding d-flex align-items-center menu-section-bot border-end border-black position-relative">
                     <div class="left-space"></div>
-                    <h5>
-                        <a href="">Facebook</a>
+                    <h6>
+                        <a href="https://www.facebook.com/hsfa.hud/">Facebook</a>
                         /
-                        <a href="">Instagram</a>
+                        <a href="https://www.instagram.com/holocaustcentrenorth/">Instagram</a>
                         /
-                        <a href="">X</a>
-                    </h5>
+                        <a href="https://x.com/holocaustnorth">X</a>
+                    </h6>
                     <div class="right-space"></div>
                 </div>
                 <div class="col-3 default-padding d-flex align-items-center menu-section-bot border-end border-black position-relative">
@@ -60,9 +64,9 @@
                         <div class="left-space"></div>
                         <div class="right-space"></div>
                     </div>
-                    <div class="default-padding">
+                    <div class="default-padding" id="bot-definer">
                         <div class="left-space"></div>
-                            <h5 class="">Memorial Gestures &copy;</h5>
+                            <h6 class="">Memorial Gestures &copy;</h6>
                         <div class="right-space"></div>
                     </div>
                 </div>
@@ -91,7 +95,23 @@
             return{
                 store,
             }
-        }
+        },
+        methods: {
+            changehcnActive() {
+                store.hcnActive=true;
+                store.openCallActive=false;
+                store.selected.section = null;
+                store.selected.exhibition = null;
+                store.selected.artist = 0;
+            },
+            changeOpencallActive() {
+                store.openCallActive=true;
+                store.hcnActive=false;
+                store.selected.section = null;
+                store.selected.exhibition = null;
+                store.selected.artist = 0;
+            }
+        },
     }
 
 
@@ -106,7 +126,23 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    
 }
+
+h5{
+    cursor: pointer;
+    line-height: 1em;
+}
+
+h4,
+h6{
+    line-height: 1em;
+}
+
+h6{
+    font-size: 115%;
+}
+
 figure{
     margin: 0;
 }
@@ -116,6 +152,14 @@ figure{
     overflow: hidden;
     flex-grow: 1;
 
+}
+
+#top-definer{
+    padding-block: 10px;
+}
+
+#bot-definer{
+    padding-block: 15px;
 }
 
 .right-space,
@@ -136,7 +180,7 @@ figure{
 }
 
 .default-padding{
-    padding: 10px 15px;
+    padding-inline: 15px;
 }
 
 .red{
@@ -146,7 +190,7 @@ figure{
 }
 
 .bg-black{
-    padding: 5px;
+    padding: 5px 7px;
 }
 
 .external-frame{
