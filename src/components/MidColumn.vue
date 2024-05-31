@@ -6,7 +6,7 @@
             <div v-if="store.dataReady" v-for="(artists, index) in store.infos[store.selected.section]?.exhibitions[store.selected.exhibition]?.artists" :key="artists.id">
                 <figure class="w-100">
                     <a>
-                        <img class="img-fluid" :src="`${store.apiBase}storage/${artists.coverImage}`" @click="changeCurrentArtist(index)" alt="">
+                        <img :src="`${store.apiBase}storage/${artists.coverImage}`" @click="changeCurrentArtist(index)" alt="">
                     </a>
                 </figure>
             </div>
@@ -48,19 +48,26 @@ export default {
         cursor: pointer;
         aspect-ratio: 1/1;
         overflow: hidden;
+        img{
+            width: 100%;
+            aspect-ratio: 1/1;
+            object-fit: cover;
+            object-position: 50% 50%;
+        }
     }
 
     span{
         cursor: pointer;
     }
     .mg-sidebar{
-        height: calc(100vh - 15px);
+        height: calc(100vh);
         width: calc(100%/4);
         border-right: 1px solid black;
+        padding-top: 15px;
         
         .content{
         height: calc(100% - 150px);
-        padding: 15px;
+        padding: 0 15px;
         overflow: auto;
         
             .scrollable{

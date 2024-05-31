@@ -4,7 +4,8 @@ export const store = reactive({
     selected: {
         section: 0,
         exhibition: "",
-        artist: 0
+        artist: 0,
+        article: 0
     },
     apiUrl: 'http://127.0.0.1:8000/api/memorial-gestures',
     apiBase: 'http://127.0.0.1:8000/',

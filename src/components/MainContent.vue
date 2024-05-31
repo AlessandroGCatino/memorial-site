@@ -31,7 +31,7 @@
             </div>
             <div v-else class="scrollable" v-if="store.dataReady">
                 
-                <SelectedDetails :artist="store.infos[store.selected.section].exhibitions[store.selected.exhibition].artists[store.selected.artist]"/>
+                <SelectedDetails />
                 
             </div>
         </div>
@@ -76,7 +76,7 @@ export default {
     }
 
     .mg-midcontent{
-        height: calc(100vh);        
+        height: calc(100vh - 15px);        
         width: calc((100%/4) * 2);
         
         

@@ -4,7 +4,7 @@
         <div class="content">
             <div class="scrollable">
 
-                <div class="sections" v-for="(element, indice) in store.infos">
+                <div class="sections mb-2 " v-for="(element, indice) in store.infos">
                     <h6 data-bs-toggle="collapse" :data-bs-target="`#collapse${indice}`" aria-expanded="false" :aria-controls="`#collapse${indice}`"><strong>{{ element.name }}</strong></h6>
                     <div class="collapse" :id="`collapse${indice}`">
 
