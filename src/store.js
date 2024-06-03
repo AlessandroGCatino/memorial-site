@@ -7,6 +7,12 @@ export const store = reactive({
         artist: 0,
         article: 0
     },
+
+    displaySidebar: true,
+    displayMiddle: false,
+    displayContent: false,
+
+
     apiUrl: 'http://127.0.0.1:8000/api/memorial-gestures',
     apiBase: 'http://127.0.0.1:8000/',
     infos:[],

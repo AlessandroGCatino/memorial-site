@@ -1,5 +1,5 @@
 <template>
-    <div class="mg-midcontent">
+    <div :class="!isDisplayed ? 'd-none d-lg-flex':''" class="mg-midcontent">
         
         <div class="content">
             <div v-if="store.openCallActive && store.openCall.exhibitions[0].artists[0].articles[0]">
@@ -45,12 +45,18 @@ import SelectedDetails from "./SelectedDetails.vue"
 
 export default {
     name: "MainContent",
+    props: {
+        isDisplayed: {
+            type: Boolean,
+            default: false
+        }
+    },
     components: {
         SelectedDetails
     },
     data () {
         return {
-            store
+            store,
         }
     },
     methods:{
@@ -97,6 +103,15 @@ export default {
                 border-top: 1px solid black;
                 padding-top: 5px;
                 padding-bottom: 20px;
+            }
+        }
+    }
+    @media (max-width: 768px){
+        .mg-midcontent{
+            width: 100%;
+            height: calc(100vh - 15px);        
+            .content{
+                height: calc(100% - 130px);
             }
         }
     }

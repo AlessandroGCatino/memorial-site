@@ -2,22 +2,22 @@
     <div class="frame">
         <div class="external-frame">
             <div class="d-flex flex-column flex-md-row">
-                <div class="col-12 col-md-3 default-padding d-flex align-items-start align-items-lg-center menu-section position-relative border-right">
+                <div class="col-12 col-md-3 default-padding d-flex align-items-start align-items-md-center menu-section position-relative border-right">
                     <div class="left-space"></div>
                     <RouterLink :to="{ name: 'home' }" @click="changehcnActive()">
                         <h6>Memorial Gestures</h6>
                     </RouterLink>
                     <div class="right-space"></div>
                 </div>
-                <div class="col-12 col-md-3 default-padding d-flex align-items-start align-items-lg-center menu-section position-relative border-right">
+                <div :class="!showNavbar ? 'd-none d-lg-flex':''" class="col-12 col-md-3 default-padding d-flex align-items-start align-items-md-center menu-section position-relative border-right">
                     <div class="left-space"></div>
                     <RouterLink :to="{ name: 'home' }" @click="changehcnActive()">
                         <h6 @click="changehcnActive()">About Us</h6>
                     </RouterLink>
                     <div class="right-space"></div>
                 </div>
-                <div class="d-flex col-12 col-md-6 justify-content-between menu-section position-relative">
-                    <div class="default-padding d-flex align-items-start align-items-lg-center">
+                <div :class="!showNavbar ? 'd-none d-lg-flex':''" class="d-flex flex-column flex-lg-row col-12 col-md-6 justify-content-between menu-section position-relative">
+                    <div class="default-padding d-flex align-items-start align-items-md-center">
                         <div class="left-space"></div>
                         <RouterLink :to="{ name: 'homepage' }" @click="changehcnActive()">
                             <h6>Holocaust Centre North</h6>
@@ -37,11 +37,11 @@
             </div>
 
             <div class="views">
-                <router-view></router-view>
+                <router-view @hide-navbar="showNavbar = false"></router-view>
             </div>
 
-            <div class="d-flex flex-column flex-md-row">
-                <div class="col-12 col-md-3 default-padding d-flex align-items-start align-items-lg-center menu-section-bot position-relative border-right">
+            <div class="d-flex flex-md-row">
+                <div class="col-md-3 default-padding d-flex align-items-start align-items-lg-center menu-section-bot position-relative border-right flex-grow-1">
                     <div class="left-space"></div>
                     <h6>
                         <a href="https://www.facebook.com/hsfa.hud/">Facebook</a>
@@ -50,20 +50,21 @@
                         /
                         <a href="https://x.com/holocaustnorth">X</a>
                     </h6>
-                    <div class="right-space"></div>
+                    <div class="right-space d-none d-lg-block"></div>
                 </div>
-                <div class="col-12 col-md-3 default-padding d-md-flex align-items-start align-items-lg-center menu-section-bot position-relative border-right d-none d-md-block">
+                <div class="col-md-3 default-padding d-md-flex align-items-start align-items-lg-center menu-section-bot position-relative border-right d-none d-lg-block">
                     <div class="left-space"></div>
                     <div class="right-space"></div>
                 </div>
-                <div class="d-flex col-12 col-md-6 justify-content-between menu-section-bot position-relative ">
+                <div class="d-flex col-md-6 justify-content-between menu-section-bot position-relative ">
                     <div class="default-padding d-flex align-items-start align-items-lg-center d-none d-md-block">
                         <div class="left-space"></div>
                         <div class="right-space"></div>
                     </div>
                     <div class="default-padding" id="bot-definer">
-                        <div class="left-space"></div>
-                        <h6 class="">Memorial Gestures &copy;</h6>
+                        <div class="left-space d-none d-lg-block"></div>
+                        <h6 class="d-none d-lg-block">Memorial Gestures &copy;</h6>
+                        <h6 class="d-lg-none">MG &copy;</h6>
                         <div class="right-space"></div>
                     </div>
                 </div>
@@ -86,17 +87,25 @@
         data() {
             return {
                 store,
+                showNavbar: true
             }
         },
         methods: {
-            changehcnActive() {
+            changehcnActive() {         
                 store.hcnActive = true;
                 store.openCallActive = false;
                 store.selected.section = null;
                 store.selected.exhibition = null;
                 store.selected.artist = 0;
+                store.displayMiddle=false,
+                store.displayContent=false,
+                store.displaySidebar=true,
+                this.showNavbar=true
             },
             changeOpencallActive() {
+                store.displaySidebar= false,
+                store.displayMiddle= false,
+                store.displayContent= true,
                 store.openCallActive = true;
                 store.hcnActive = false;
                 store.selected.section = null;
@@ -143,6 +152,10 @@ figure {
 
 #top-definer {
     padding-block: 10px;
+    .left-space,
+    .right-space{
+        height: 150px;
+    }
 }
 
 #bot-definer {
@@ -169,15 +182,10 @@ figure {
     padding-inline: 15px;
 }
 
-// .border-right{
-//     border-right: 1px solid black;
-// }
-
-.red {
-    background-color: red;
-    width: 100%;
-    height: 15px;
+.border-right{
+    border-right: 1px solid black;
 }
+
 
 .bg-black {
     padding: 5px 7px;
@@ -208,6 +216,10 @@ figure {
 
 @media (max-width: 768px) {
 
+    .border-right{
+        border-right: none;
+    }   
+
     .mid-whitespace{
         display: none;
     }
@@ -222,10 +234,6 @@ figure {
 
     .bg-black{
         width: fit-content;
-    }
-
-    .d-flex {
-        flex-direction: column;
     }
 
     .default-padding {

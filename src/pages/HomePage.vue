@@ -1,9 +1,9 @@
 <template>
-    <div class="d-flex">
-        <SideMenu/>
-        <MidColumn/>
+    <div class="d-md-flex">
+        <SideMenu @changeToMid="changeMid" :isDisplayed="store.displaySidebar"/>
+        <MidColumn @changeToContent="changeContent" :isDisplayed="store.displayMiddle"/>
 
-        <MainContent/>
+        <MainContent :isDisplayed="store.displayContent"/>
 
     </div>
 </template>
@@ -25,21 +25,38 @@ export default {
     data() {
         return {
             store,
+            displaySidebar: true,
+            displayMiddle: false,
+            displayContent: false
         }
     },
     methods: {
-        // ottiene voti da stampare nella select
+        changeSide() {
+        store.displayMiddle=false,
+        store.displayContent=false,
+        store.displaySidebar=true
+        },
+        changeMid() {
+        store.displayMiddle=true,
+        store.displaySidebar=false,
+        this.$emit("hide-navbar")
+        },
+        changeContent() {
+        store.displayContent=true,
+        store.displayMiddle=false,
+        store.displaySidebar=false
+        },
 
         getDatas() {
             axios.get(`${store.apiUrl}`).then(response => {
                 store.infos = response.data.sections;
                 store.openCall = response.data.openCall;
-                console.log("Intero array: ", store.infos);
-                console.log("Exhibition: ", store.infos[0].exhibitions)
-                console.log("Open Call: ", store.openCall);
+                // console.log("Intero array: ", store.infos);
+                // console.log("Exhibition: ", store.infos[0].exhibitions)
+                // console.log("Open Call: ", store.openCall);
 
                 store.dataReady = true
-                console.log(store.infos[store.selected.section].exhibitions[store.selected.exhibition])
+                // console.log(store.infos[store.selected.section].exhibitions[store.selected.exhibition])
             });
         }
     },

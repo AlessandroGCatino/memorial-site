@@ -1,5 +1,5 @@
 <template>
-    <div class="mg-sidebar">
+    <div :class="!isDisplayed ? 'd-none d-lg-flex':''" class="mg-sidebar">
         
         <div class="content">
             <div class="scrollable">
@@ -9,7 +9,7 @@
                     <div class="collapse" :id="`collapse${indice}`">
 
                         <div v-for="(item, index) in element.exhibitions" :key="item.id">
-                            <span @click="changeCurrentArticle(indice, index)">{{ item.title }}</span>
+                            <span @click="handleArticleClick(indice, index)">{{ item.title }}</span>
                         </div>
                     </div>
                 </div>
@@ -26,9 +26,15 @@ import { store } from '../store';
 
 export default {
     name: "SideMenu",
+    props: {
+        isDisplayed: {
+            type: Boolean,
+            default: true
+        }
+    },
     data () {
         return {
-            store
+            store,
         }
     },
     methods: {
@@ -38,8 +44,10 @@ export default {
             store.selected.artist = 0;
             store.hcnActive=false;
             store.openCallActive=false;
-            console.log("Section: ", store.selected.section)
-            console.log("Article: ", store.selected.exhibition)
+        },
+        handleArticleClick(sectionid, exhibitionid) {
+            this.changeCurrentArticle(sectionid, exhibitionid);
+            this.$emit('changeToMid');
         }
     },
 }
@@ -99,6 +107,11 @@ export default {
         right: 0;
     }
 
+    }
+    @media (max-width: 768px) { /* Modifica: le regole CSS all'interno di questa media query verranno applicate solo per schermi con larghezza massima di 768px (ad es. dispositivi mobili) */
+        .mg-sidebar{
+            width: calc(100vh - 15px); 
+        }
     }
     
 </style>
