@@ -3,7 +3,7 @@
         <div class=" top-images">
             <div class="col-12">
                 <figure id="artistImage" ref="artistImage">
-                    <img :src="`${store.apiBase}storage/${store.infos[store.selected.section].exhibitions[store.selected.exhibition].artists[store.selected.artist].coverImage}`" @load="scrollToImage" alt="" class="img-fluid">
+                    <img v-if="store.infos[store.selected.section].exhibitions[store.selected.exhibition].artists[store.selected.artist].coverImage" :src="`${store.apiBase}storage/${store.infos[store.selected.section].exhibitions[store.selected.exhibition].artists[store.selected.artist].coverImage}`" @load="scrollToImage" alt="" class="img-fluid">
                 </figure>
             </div>
         </div>
@@ -64,7 +64,6 @@ export default {
         },
         bigImage(event){
             event.stopPropagation();
-            
         }
     },
     watch: {
