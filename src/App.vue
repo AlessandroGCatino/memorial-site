@@ -2,24 +2,54 @@
     <div class="frame">
         <div class="external-frame">
             <div class="d-flex flex-column flex-md-row">
-                <div class="col-12 col-md-3 default-padding d-flex align-items-start align-items-md-center menu-section position-relative border-right">
+                <div class="col-12 col-md-3 default-padding d-flex align-items-start align-items-md-center justify-content-between menu-section position-relative border-right">
                     <div class="left-space"></div>
-                    <RouterLink :to="{ name: 'home' }" @click="changehcnActive()">
+                    <RouterLink :to="{ name: 'homepage' }" @click="changeBaseState()">
                         <h6>Memorial Gestures</h6>
                     </RouterLink>
+                    <h6 class="d-md-none hamburger" :class="showNavbar ? 'd-none':''" @click="hamburgerMenu()">
+                    +
+                    </h6>
                     <div class="right-space"></div>
                 </div>
-                <div :class="!showNavbar ? 'd-none d-lg-flex':''" class="col-12 col-md-3 default-padding d-flex align-items-start align-items-md-center menu-section position-relative border-right">
+                <!-- <div class="collapse" :class="showNavbar ? 'd-none':''" id="hamburger">
+                    <div class="col-12 col-md-3 default-padding d-flex align-items-start align-items-md-center menu-section position-relative border-right">
                     <div class="left-space"></div>
-                    <RouterLink :to="{ name: 'home' }" @click="changehcnActive()">
+                    <RouterLink :to="{ name: 'homepage' }" @click="changehcnActive()">
+                        <h6 @click="changehcnActive()">About Us</h6>
+                    </RouterLink>
+                    <div class="right-space"></div>
+                    </div>
+                    <div class="d-flex flex-column flex-md-row col-12 col-md-6 justify-content-between menu-section position-relative">
+                        <div class="default-padding d-flex align-items-start align-items-md-center">
+                            <div class="left-space"></div>
+                            <RouterLink :to="{ name: 'home' }" @click="changehcnActive()">
+                                <h6>Holocaust Centre North</h6>
+                            </RouterLink>
+                            <div class="right-space"></div>
+                        </div>
+                        <div class="default-padding" id="top-definer">
+                            <div class="left-space"></div>
+                            <div class="bg-black">
+                                <RouterLink :to="{ name: 'homepage' }">
+                                    <h6 @click="changeOpencallActive()" class="text-white">OPEN CALL</h6>
+                                </RouterLink>
+                            </div>
+                            <div class="right-space"></div>
+                        </div>
+                    </div>
+                </div> -->
+                <div :class="!showNavbar ? 'd-none d-md-flex':''" class="col-12 col-md-3 default-padding d-flex align-items-start align-items-md-center menu-section position-relative border-right">
+                    <div class="left-space"></div>
+                    <RouterLink :to="{ name: 'homepage' }" @click="changehcnActive()">
                         <h6 @click="changehcnActive()">About Us</h6>
                     </RouterLink>
                     <div class="right-space"></div>
                 </div>
-                <div :class="!showNavbar ? 'd-none d-lg-flex':''" class="d-flex flex-column flex-lg-row col-12 col-md-6 justify-content-between menu-section position-relative">
+                <div :class="!showNavbar ? 'd-none d-md-flex':''" class="d-flex flex-column flex-md-row col-12 col-md-6 justify-content-between menu-section position-relative">
                     <div class="default-padding d-flex align-items-start align-items-md-center">
                         <div class="left-space"></div>
-                        <RouterLink :to="{ name: 'homepage' }" @click="changehcnActive()">
+                        <RouterLink :to="{ name: 'home' }" @click="changehcnActive()">
                             <h6>Holocaust Centre North</h6>
                         </RouterLink>
                         <div class="right-space"></div>
@@ -27,7 +57,7 @@
                     <div class="default-padding" id="top-definer">
                         <div class="left-space"></div>
                         <div class="bg-black">
-                            <RouterLink :to="{ name: 'home' }">
+                            <RouterLink :to="{ name: 'homepage' }">
                                 <h6 @click="changeOpencallActive()" class="text-white">OPEN CALL</h6>
                             </RouterLink>
                         </div>
@@ -41,7 +71,7 @@
             </div>
 
             <div class="d-flex flex-md-row">
-                <div class="col-md-3 default-padding d-flex align-items-start align-items-lg-center menu-section-bot position-relative border-right flex-grow-1">
+                <div class="col-md-3 default-padding d-flex align-items-start align-items-md-center menu-section-bot position-relative border-right flex-grow-1">
                     <div class="left-space"></div>
                     <h6>
                         <a href="https://www.facebook.com/hsfa.hud/">Facebook</a>
@@ -50,21 +80,21 @@
                         /
                         <a href="https://x.com/holocaustnorth">X</a>
                     </h6>
-                    <div class="right-space d-none d-lg-block"></div>
+                    <div class="right-space d-none d-md-block"></div>
                 </div>
-                <div class="col-md-3 default-padding d-md-flex align-items-start align-items-lg-center menu-section-bot position-relative border-right d-none d-lg-block">
+                <div class="col-md-3 default-padding d-md-flex align-items-start align-items-md-center menu-section-bot position-relative border-right d-none d-md-block">
                     <div class="left-space"></div>
                     <div class="right-space"></div>
                 </div>
                 <div class="d-flex col-md-6 justify-content-between menu-section-bot position-relative ">
-                    <div class="default-padding d-flex align-items-start align-items-lg-center d-none d-md-block">
+                    <div class="default-padding d-flex align-items-start align-items-md-center d-none d-md-block">
                         <div class="left-space"></div>
                         <div class="right-space"></div>
                     </div>
                     <div class="default-padding" id="bot-definer">
-                        <div class="left-space d-none d-lg-block"></div>
-                        <h6 class="d-none d-lg-block">Memorial Gestures &copy;</h6>
-                        <h6 class="d-lg-none">MG &copy;</h6>
+                        <div class="left-space d-none d-md-block"></div>
+                        <h6 class="d-none d-md-block">Memorial Gestures &copy;</h6>
+                        <h6 class="d-md-none">MG &copy;</h6>
                         <div class="right-space"></div>
                     </div>
                 </div>
@@ -87,11 +117,27 @@
         data() {
             return {
                 store,
-                showNavbar: true
+                showNavbar: true,
+                menuInteraction: false
             }
         },
         methods: {
-            changehcnActive() {         
+            hamburgerMenu(){
+                if(!store.menuInteraction){
+                    store.displayMiddle=false,
+                    store.displayContent=false,
+                    store.displaySidebar=true
+                    // this.showNavbar=true
+                    store.menuInteraction=true
+                } else {
+                    store.displayMiddle=true,
+                    store.displayContent=false,
+                    store.displaySidebar=false,
+                    store.menuInteraction=false
+                    // this.showNavbar=false
+                }
+            },
+            changeBaseState() {         
                 store.hcnActive = true;
                 store.openCallActive = false;
                 store.selected.section = null;
@@ -100,6 +146,17 @@
                 store.displayMiddle=false,
                 store.displayContent=false,
                 store.displaySidebar=true,
+                this.showNavbar=true
+            },
+            changehcnActive() {         
+                store.hcnActive = true;
+                store.openCallActive = false;
+                store.selected.section = null;
+                store.selected.exhibition = null;
+                store.selected.artist = 0;
+                store.displayMiddle=false,
+                store.displayContent=true,
+                store.displaySidebar=false,
                 this.showNavbar=true
             },
             changeOpencallActive() {
@@ -119,6 +176,12 @@
 <style lang="scss">
 
 @use "./styles/general.scss";
+
+.hamburger{
+    background-color: black;
+    color: white;
+    padding-inline: 5px;
+}
 
 * {
     margin: 0;

@@ -5,8 +5,8 @@
             <div class="scrollable">
 
                 <div class="sections mb-2 " v-for="(element, indice) in store.infos">
-                    <h6 data-bs-toggle="collapse" :data-bs-target="`#collapse${indice}`" aria-expanded="false" :aria-controls="`#collapse${indice}`"><strong>{{ element.name }}</strong></h6>
-                    <div class="collapse" :id="`collapse${indice}`">
+                    <h6 data-bs-toggle="collapse" :data-bs-target="`#collapse${indice}`" :aria-expanded="element.name == 'Exhibitions'?'true':'false'" :aria-controls="`#collapse${indice}`"><strong>{{ element.name }}</strong></h6>
+                    <div :class="element.name == 'Exhibitions'?'collapse.show':'collapse'" :id="`collapse${indice}`">
 
                         <div v-for="(item, index) in element.exhibitions" :key="item.id">
                             <span @click="handleArticleClick(indice, index)">{{ item.title }}</span>
@@ -44,11 +44,21 @@ export default {
             store.selected.artist = 0;
             store.hcnActive=false;
             store.openCallActive=false;
+            store.menuInteraction=false
+
         },
         handleArticleClick(sectionid, exhibitionid) {
             this.changeCurrentArticle(sectionid, exhibitionid);
             this.$emit('changeToMid');
+        },
+        refreshPage(){
+            let timer = setTimeout( () => {
+                this.changeCurrentArticle(1,0)
+                }, 500);
         }
+    },
+    mounted () {
+        this.refreshPage();
     },
 }
 </script>

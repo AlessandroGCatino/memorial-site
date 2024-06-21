@@ -1,13 +1,13 @@
 <template>
     <div class="content-container">
-        <div class=" top-images">
+        <!-- <div class=" top-images">
             <div class="col-12">
                 <figure id="artistImage" ref="artistImage">
                     <img v-if="store.infos[store.selected.section].exhibitions[store.selected.exhibition].artists[store.selected.artist].coverImage" :src="`${store.apiBase}storage/${store.infos[store.selected.section].exhibitions[store.selected.exhibition].artists[store.selected.artist].coverImage}`" @load="scrollToImage" alt="" class="img-fluid">
                 </figure>
             </div>
-        </div>
-        <div class=" description">
+        </div> -->
+        <div>
             <div class="col-12">
                 <h6 class="mb-2"><b>{{ store.infos[store.selected.section].exhibitions[store.selected.exhibition].artists[store.selected.artist].artistName }}</b></h6>
                 <h6><b>{{ store.infos[store.selected.section].exhibitions[store.selected.exhibition].expositionDates }}</b></h6>
@@ -15,21 +15,21 @@
             </div>
         </div>
         
-        <div class="" v-for="element in store.infos[store.selected.section].exhibitions[store.selected.exhibition].artists[store.selected.artist].articles" :key="element.id">
+        <div>
             <div class="col-12 text-center">
                 <figure>
-                    <img :src="`${store.apiBase}storage/${element.operaPicture}`" alt="" class="w-100">
+                    <img :src="`${store.apiBase}storage/${store.infos[store.selected.section].exhibitions[store.selected.exhibition].artists[store.selected.artist].articles[store.selected.article].operaPicture}`" alt="" class="w-100">
                 </figure>
             </div>
             <div class="col-12 description">
-                <h6 class="mb-3"><b>{{ element.operaName }}</b>, <b>{{ store.infos[store.selected.section].exhibitions[store.selected.exhibition].artists[store.selected.artist].artistName }}</b></h6>
-                <h6 class="mb-3"><b>{{ element.operaYear }}</b></h6>
-                <p class="artistDesc"><i>{{ element.operaMaterial }}</i></p>
-                <p class="artistDesc">{{ element.operaDescription }}</p>
+                <h6 class="mb-3"><b>{{ store.infos[store.selected.section].exhibitions[store.selected.exhibition].artists[store.selected.artist].articles[store.selected.article].operaName }}</b>, <b>{{ store.infos[store.selected.section].exhibitions[store.selected.exhibition].artists[store.selected.artist].artistName }}</b></h6>
+                <h6 class="mb-3"><b>{{ store.infos[store.selected.section].exhibitions[store.selected.exhibition].artists[store.selected.artist].articles[store.selected.article].operaYear }}</b></h6>
+                <p class="artistDesc"><i>{{ store.infos[store.selected.section].exhibitions[store.selected.exhibition].artists[store.selected.artist].articles[store.selected.article].operaMaterial }}</i></p>
+                <p class="artistDesc">{{ store.infos[store.selected.section].exhibitions[store.selected.exhibition].artists[store.selected.artist].articles[store.selected.article].operaDescription }}</p>
             </div>
 
             <div class="photo-galery-with-zoom">
-                <figure v-for="items in element.pictures" :key="items.singlePicture">
+                <figure v-for="items in store.infos[store.selected.section].exhibitions[store.selected.exhibition].artists[store.selected.artist].articles[store.selected.article].pictures" :key="items.singlePicture">
                     <input type="checkbox" name="galery" onclick="bigImage(event);"/>
                     <img :src="`${store.apiBase}storage/${items.singlePicture}`" alt="">
                 </figure>
@@ -76,6 +76,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+p{
+    font: 17px/20px Times;
+}
 
 .photo-galery-with-zoom {
   display: flex;

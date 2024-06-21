@@ -2,7 +2,7 @@
     <div :class="!isDisplayed ? 'd-none d-lg-flex':''" class="mg-midcontent">
         
         <div class="content">
-            <div v-if="store.openCallActive && store.openCall.exhibitions[0].artists[0].articles[0]">
+            <div v-if="store.openCallActive && store.openCall?.exhibitions[0]?.artists[0]?.articles[0]">
 
                 <div class="text-center">
                     <span>This is an open call</span>
@@ -21,7 +21,7 @@
                 No open call available! Stay tuned on our socials for more info.
             </div>
             <div v-else-if="store.hcnActive" class="hcn">
-                <h4>Holocaust Centre North</h4>
+                <h6>Holocaust Centre North</h6>
                 <p>Holocaust Centre North is home to an exhibition, learning programme and archive, all of which tell the stories of Jewish survivors of the Holocaust who rebuilt their lives in the North of England. By ensuring that the atrocities of the Nazi genocide are never forgotten we seek to raise awareness of human rights, freedom and equality. Our educational, academic and artistic programming is shaped by a community-led approach, working in dialogue with survivors and their descendants. <br>
                 In Holocaust Centre North’s archive, you will find traces of: pre-war Jewish life & culture, forced displacement/migration, child refugees, trauma/intergenerational trauma, memory/post-memory, loss, internment, forced labour, survival & liberation, childhood & youth, diasporic identities, and making a new life in the North of England. We believe these traces of the past can help us to understand and amplify contemporary struggles and experiences. <br>
                 Our archival collection includes photographs, letters, legal documents, artefacts, textiles, ephemera & postcards, as well as an extensive collection of video & audio testimony with Holocaust survivors and their families. <br>
@@ -31,7 +31,7 @@
             </div>
             <div v-else class="scrollable" v-if="store.dataReady">
                 
-                <SelectedDetails />
+                <SelectedDetails/>
                 
             </div>
         </div>
@@ -75,6 +75,9 @@ export default {
 
 
     .hcn{
+        h6{
+            padding-bottom: 15px;
+        }
         p{
             font:20px/22px Times;
         }

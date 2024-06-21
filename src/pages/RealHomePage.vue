@@ -1,6 +1,5 @@
 <template>
-
-    
+    <div class="screen-container d-flex flex-wrap">
 
         <!-- <div class="text-center">
             <h1>
@@ -8,31 +7,42 @@
             </h1>
         </div> -->
         
-        <a ref="move" id="test" style="position: absolute; top: 150px; left: 150px;" href="/" class="btn btn-primary " >
+        <!-- <a ref="move" id="test" style="position: absolute; top: 150px; left: 150px;" href="/" class="btn btn-primary " >
             Back to Index
-        </a>
+        </a> -->
+    
+        <div ref="move2" style="top: 150px; left: 1200px;" class="moving-objects">
+            <a href="/home">
+                <figure>
+                    <img src="../assets/img/Ariane - Yellow Clock - Canvas, organza, clock_2021(1).png" alt="">
+                </figure>
+            </a>
+        </div>
+    
+        <div ref="move3" style="top: 550px; left: 200px;" class="moving-objects">
+            <a href="/home">
+                <figure>
+                    <img src="../assets/img/catalog_Irina_22_print7.png" alt="">
+                </figure>
+            </a>
+        </div>
+        <div ref="move4" style="top: 550px; left: 1200px;" class="moving-objects">
+            <a href="/home">
+                <figure>
+                    <img src="../assets/img/DSC_4394.png" alt="">
+                </figure>
+            </a>
+        </div>
+        <div ref="move5" style="top: 550px; left: 800px;" class="moving-objects">
+            <a href="/home">
+                <figure>
+                    <img src="../assets/img/ExhibitionPosterDraftFinalA3-Center.png" alt="">
+                </figure>
+            </a>
+        </div>
+    </div>
+    
 
-        <div ref="move2" style="position: absolute; top: 150px; left: 1200px;" class="moving-objects">
-            <figure>
-                <img src="../assets/img/Ariane - Yellow Clock - Canvas, organza, clock_2021(1).png" alt="">
-            </figure>
-        </div>
-
-        <div ref="move3" style="position: absolute; top: 550px; left: 200px;" class="moving-objects">+
-            <figure>
-                <img src="../assets/img/catalog_Irina_22_print7.png" alt="">
-            </figure>
-        </div>
-        <div ref="move4" style="position: absolute; top: 550px; left: 1200px;" class="moving-objects">
-            <figure>
-                <img src="../assets/img/DSC_4394.png" alt="">
-            </figure>
-        </div>
-        <div ref="move5" style="position: absolute; top: 550px; left: 800px;" class="moving-objects">
-            <figure>
-                <img src="../assets/img/ExhibitionPosterDraftFinalA3-Center.png" alt="">
-            </figure>
-        </div>
     
 </template>
 
@@ -70,14 +80,14 @@ import MainContent from '@/components/MainContent.vue';
             let vueDatas = this;
 
             // pulsante home
-            this.$refs.move.addEventListener('mousedown', function(e){
-                e.preventDefault();
-                vueDatas.isDown1 = true;
-                let lOffset = this.offsetLeft;
-                let tOffset = this.offsetTop
-                vueDatas.offset = [lOffset - e.clientX,tOffset - e.clientY];
-                console.log("Preso", vueDatas.isDown1, vueDatas.offset, e.clientX)
-            }, true);
+            // this.$refs.move.addEventListener('mousedown', function(e){
+            //     e.preventDefault();
+            //     vueDatas.isDown1 = true;
+            //     let lOffset = this.offsetLeft;
+            //     let tOffset = this.offsetTop
+            //     vueDatas.offset = [lOffset - e.clientX,tOffset - e.clientY];
+            //     console.log("Preso", vueDatas.isDown1, vueDatas.offset, e.clientX)
+            // }, true);
 
             // secondo pulsante
             
@@ -87,7 +97,7 @@ import MainContent from '@/components/MainContent.vue';
                 let lOffset = this.offsetLeft;
                 let tOffset = this.offsetTop
                 vueDatas.offset = [lOffset - e.clientX,tOffset - e.clientY];
-                console.log("Preso", vueDatas.isDown2, vueDatas.offset, e.clientX)
+                // console.log("Preso", vueDatas.isDown2, vueDatas.offset, e.clientX)
             }, true);
 
             // terzo pulsante
@@ -98,7 +108,7 @@ import MainContent from '@/components/MainContent.vue';
                 let lOffset = this.offsetLeft;
                 let tOffset = this.offsetTop
                 vueDatas.offset = [lOffset - e.clientX,tOffset - e.clientY];
-                console.log("Preso", vueDatas.isDown3, vueDatas.offset, e.clientX)
+                // console.log("Preso", vueDatas.isDown3, vueDatas.offset, e.clientX)
             }, true);
 
             // terzo pulsante
@@ -109,7 +119,7 @@ import MainContent from '@/components/MainContent.vue';
                 let lOffset = this.offsetLeft;
                 let tOffset = this.offsetTop
                 vueDatas.offset = [lOffset - e.clientX,tOffset - e.clientY];
-                console.log("Preso", vueDatas.isDown4, vueDatas.offset, e.clientX)
+                // console.log("Preso", vueDatas.isDown4, vueDatas.offset, e.clientX)
             }, true);
 
             // terzo pulsante
@@ -120,7 +130,7 @@ import MainContent from '@/components/MainContent.vue';
                 let lOffset = this.offsetLeft;
                 let tOffset = this.offsetTop
                 vueDatas.offset = [lOffset - e.clientX,tOffset - e.clientY];
-                console.log("Preso", vueDatas.isDown5, vueDatas.offset, e.clientX)
+                // console.log("Preso", vueDatas.isDown5, vueDatas.offset, e.clientX)
             }, true);
 
             document.addEventListener('mouseup', function() {
@@ -129,11 +139,11 @@ import MainContent from '@/components/MainContent.vue';
                 vueDatas.isDown3 = false;
                 vueDatas.isDown4 = false;
                 vueDatas.isDown5 = false;
-                console.log("lasciato", vueDatas.isDown1)
+                // console.log("lasciato", vueDatas.isDown1)
 
             }, true);
 
-            this.$refs.move.addEventListener('click', listener)
+            // this.$refs.move.addEventListener('click', listener)
             this.$refs.move2.addEventListener('click', listener)
             this.$refs.move3.addEventListener('click', listener)
             this.$refs.move4.addEventListener('click', listener)
@@ -144,19 +154,19 @@ import MainContent from '@/components/MainContent.vue';
             let clicks = 0;
             let timer;
             // Pulsante home
-            vueDatas.$refs.move.addEventListener('click', function(e){
-                clicks++;
-                if (clicks === 1) {
-                    timer = setTimeout( () => {
-                    clicks = 0
-                    }, 200);
-                } else {
-                    clearTimeout(timer);
-                    vueDatas.$refs.move.removeEventListener("click", listener)
-                    console.log("entrato")
-                    clicks = 0;
-                }         
-            }, true)
+            // vueDatas.$refs.move.addEventListener('click', function(e){
+            //     clicks++;
+            //     if (clicks === 1) {
+            //         timer = setTimeout( () => {
+            //         clicks = 0
+            //         }, 200);
+            //     } else {
+            //         clearTimeout(timer);
+            //         vueDatas.$refs.move.removeEventListener("click", listener)
+            //         console.log("entrato")
+            //         clicks = 0;
+            //     }         
+            // }, true)
 
             // second image
             vueDatas.$refs.move2.addEventListener('click', function(e){
@@ -168,7 +178,7 @@ import MainContent from '@/components/MainContent.vue';
                 } else {
                     clearTimeout(timer);
                     vueDatas.$refs.move2.removeEventListener("click", listener)
-                    console.log("entrato")
+                    // console.log("entrato")
                     clicks = 0;
                 }         
             }, true)
@@ -183,12 +193,12 @@ import MainContent from '@/components/MainContent.vue';
                 } else {
                     clearTimeout(timer);
                     vueDatas.$refs.move3.removeEventListener("click", listener)
-                    console.log("entrato")
+                    // console.log("entrato")
                     clicks = 0;
                 }         
             }, true)
 
-            // third image
+            // fourth image
             vueDatas.$refs.move4.addEventListener('click', function(e){
                 clicks++;
                 if (clicks === 1) {
@@ -198,12 +208,12 @@ import MainContent from '@/components/MainContent.vue';
                 } else {
                     clearTimeout(timer);
                     vueDatas.$refs.move4.removeEventListener("click", listener)
-                    console.log("entrato")
+                    // console.log("entrato")
                     clicks = 0;
                 }         
             }, true)
 
-            // third image
+            // fifth image
             vueDatas.$refs.move5.addEventListener('click', function(e){
                 clicks++;
                 if (clicks === 1) {
@@ -213,27 +223,27 @@ import MainContent from '@/components/MainContent.vue';
                 } else {
                     clearTimeout(timer);
                     vueDatas.$refs.move5.removeEventListener("click", listener)
-                    console.log("entrato")
+                    // console.log("entrato")
                     clicks = 0;
                 }         
             }, true)
 
             document.addEventListener('mousemove', function(e) {
                 e.preventDefault();
-                if (vueDatas.isDown1) {
-                    console.log("mi sposto nell'if")
+                // if (vueDatas.isDown1) {
+                //     console.log("mi sposto nell'if")
                     
-                    vueDatas.mousePosition = {
+                //     vueDatas.mousePosition = {
 
-                        x : e.clientX,
-                        y : e.clientY
+                //         x : e.clientX,
+                //         y : e.clientY
 
-                    };
-                    vueDatas.$refs.move.style.left = (vueDatas.mousePosition.x + vueDatas.offset[0]) + 'px';
-                    vueDatas.$refs.move.style.top  = (vueDatas.mousePosition.y + vueDatas.offset[1]) + 'px';
-                }
+                //     };
+                //     vueDatas.$refs.move.style.left = (vueDatas.mousePosition.x + vueDatas.offset[0]) + 'px';
+                //     vueDatas.$refs.move.style.top  = (vueDatas.mousePosition.y + vueDatas.offset[1]) + 'px';
+                // }
                 if (vueDatas.isDown2) {
-                    console.log("mi sposto nell'if")
+                    // console.log("mi sposto nell'if")
                     
                     vueDatas.mousePosition = {
 
@@ -245,7 +255,7 @@ import MainContent from '@/components/MainContent.vue';
                     vueDatas.$refs.move2.style.top  = (vueDatas.mousePosition.y + vueDatas.offset[1]) + 'px';
                 }
                 if (vueDatas.isDown3) {
-                    console.log("mi sposto nell'if")
+                    // console.log("mi sposto nell'if")
                     
                     vueDatas.mousePosition = {
 
@@ -257,7 +267,7 @@ import MainContent from '@/components/MainContent.vue';
                     vueDatas.$refs.move3.style.top  = (vueDatas.mousePosition.y + vueDatas.offset[1]) + 'px';
                 }
                 if (vueDatas.isDown4) {
-                    console.log("mi sposto nell'if")
+                    // console.log("mi sposto nell'if")
                     
                     vueDatas.mousePosition = {
 
@@ -269,7 +279,7 @@ import MainContent from '@/components/MainContent.vue';
                     vueDatas.$refs.move4.style.top  = (vueDatas.mousePosition.y + vueDatas.offset[1]) + 'px';
                 }
                 if (vueDatas.isDown5) {
-                    console.log("mi sposto nell'if")
+                    // console.log("mi sposto nell'if")
                     
                     vueDatas.mousePosition = {
 
@@ -289,6 +299,7 @@ import MainContent from '@/components/MainContent.vue';
 
 .moving-objects{
     cursor: pointer;
+    position: absolute;
     figure{
         width: 150px;
         img{
@@ -302,5 +313,24 @@ import MainContent from '@/components/MainContent.vue';
 //     left: 0;
 //     top: 0;
 // }
+
+@media (max-width: 768px) {
+
+.moving-objects{
+    position: static;
+    display: flex;
+    justify-content: center;
+}
+.screen-container{
+    height: calc(100% - 15px);
+    overflow: auto;
+    width: 100%;
+    justify-content: space-between;
+    .moving-objects{
+        width: calc(100% / 2);
+        
+    }
+}
+}
 
 </style>

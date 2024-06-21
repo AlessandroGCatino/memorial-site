@@ -3,9 +3,9 @@
 
         <div class="content">
             <div v-if="store.dataReady" v-for="(artists, index) in store.infos[store.selected.section]?.exhibitions[store.selected.exhibition]?.artists" :key="artists.id">
-                <figure class="w-100">
+                <figure v-for="article,pos in artists.articles" :key="article.id" class="w-100">
                     <a>
-                        <img :src="`${store.apiBase}storage/${artists.coverImage}`" @click="handleArticleClick(index)" alt="">
+                        <img :src="`${store.apiBase}storage/${article.operaPicture}`" @click="handleArticleClick(index, pos)" alt="">
                     </a>
                 </figure>
             </div>
@@ -31,19 +31,30 @@ export default {
         }
     },
     methods: {
-        changeCurrentArtist(artist) {
+        changeCurrentArtist(artist, article) {
             store.selected.artist = artist;
+            store.selected.article = article;
+            store.menuInteraction=false
+
             // console.log("Section: ", store.selected.section)
             // console.log("Exhibition: ", store.selected.exhibition)
             // console.log("Artist: ", store.selected.artist)
 
         },
-        handleArticleClick(index) {
-            this.changeCurrentArtist(index);
+        handleArticleClick(artist, article) {
+            this.changeCurrentArtist(artist, article);
             this.$emit('changeToContent');
+        },
+        refreshPage(){
+            let timer = setTimeout( () => {
+                this.changeCurrentArtist(0,0)
+                }, 500);
         }
         
     },
+    mounted() {
+        this.refreshPage()
+    }
 }
 </script>
 

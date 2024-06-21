@@ -21,6 +21,7 @@ export const store = reactive({
     dataReady: false,
     openCallActive:false,
     hcnActive: true,
+    menuInteraction:false
 
     // sections: [
     //     {
