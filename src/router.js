@@ -16,7 +16,6 @@ const router = createRouter({
             name: "homepage",
             component: HomePage
         }
-        
     ]
 })
 
