@@ -40,6 +40,22 @@
                 </figure>
             </a>
         </div>
+        <div v-if="store.dataReady" ref="move6" style="top: 200px; left: 200px;" class="moving-objects">
+            <a href="/home">
+                <figure>
+                    <img :src="getOperaPictureUrl(picData, 3, 0)" alt="">
+                    
+                </figure>
+            </a>
+        </div>
+        <div v-if="store.dataReady" ref="move7" style="top: 400px; left: 800px;" class="moving-objects">
+            <a href="/home">
+                <figure>
+                    <img :src="getOperaPictureUrl(picData, 4, 0)" alt="">
+                    
+                </figure>
+            </a>
+        </div>
     </div>
     
 
