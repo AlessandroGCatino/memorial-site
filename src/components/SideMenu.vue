@@ -53,7 +53,7 @@ export default {
         },
         refreshPage(){
             let timer = setTimeout( () => {
-                this.changeCurrentArticle(1,0)
+                this.changeCurrentArticle(0,0)
                 }, 500);
         }
     },

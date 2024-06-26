@@ -2,6 +2,7 @@
     <div :class="!isDisplayed ? 'd-none d-lg-flex':''" class="mg-sidebar">
 
         <div class="content">
+
             <div v-if="store.dataReady" v-for="(artists, index) in store.infos[store.selected.section]?.exhibitions[store.selected.exhibition]?.artists" :key="artists.id">
                 <figure v-for="article,pos in artists.articles" :key="article.id" class="w-100">
                     <a>

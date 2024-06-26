@@ -11,32 +11,32 @@
             Back to Index
         </a> -->
     
-        <div ref="move2" style="top: 150px; left: 1200px;" class="moving-objects">
+        <div v-if="store.dataReady" ref="move2" style="top: 150px; left: 1200px;" class="moving-objects">
             <a href="/home">
                 <figure>
-                    <img src="../assets/img/Ariane - Yellow Clock - Canvas, organza, clock_2021(1).png" alt="">
+                    <img :src="getOperaPictureUrl(picData, 0, 0)" alt="">
                 </figure>
             </a>
         </div>
     
-        <div ref="move3" style="top: 550px; left: 200px;" class="moving-objects">
+        <div v-if="store.dataReady" ref="move3" style="top: 550px; left: 200px;" class="moving-objects">
             <a href="/home">
                 <figure>
-                    <img src="../assets/img/catalog_Irina_22_print7.png" alt="">
+                    <img :src="getOperaPictureUrl(picData, 1, 0)" alt="">
                 </figure>
             </a>
         </div>
-        <div ref="move4" style="top: 550px; left: 1200px;" class="moving-objects">
+        <div v-if="store.dataReady" ref="move4" style="top: 550px; left: 1200px;" class="moving-objects">
             <a href="/home">
                 <figure>
-                    <img src="../assets/img/DSC_4394.png" alt="">
+                    <img :src="getOperaPictureUrl(picData, 0, 1)" alt="">
                 </figure>
             </a>
         </div>
-        <div ref="move5" style="top: 550px; left: 800px;" class="moving-objects">
+        <div v-if="store.dataReady" ref="move5" style="top: 550px; left: 800px;" class="moving-objects">
             <a href="/home">
                 <figure>
-                    <img src="../assets/img/ExhibitionPosterDraftFinalA3-Center.png" alt="">
+                    <img :src="getOperaPictureUrl(picData, 2, 0)" alt="">
                 </figure>
             </a>
         </div>
@@ -49,6 +49,8 @@
 <script>
 import SideMenu from '@/components/SideMenu.vue';
 import MainContent from '@/components/MainContent.vue';
+import axios from 'axios';
+import { store } from '@/store';
 
     export default {
         name: "RealHomePage",
@@ -58,6 +60,8 @@ import MainContent from '@/components/MainContent.vue';
         },
         data() {
             return {
+                store,
+                picData: [],
                 el: "#app",
                 mousePosition: "",
                 offset: [0,0],
@@ -69,10 +73,30 @@ import MainContent from '@/components/MainContent.vue';
             }
         },
         methods: {
+          getOperaPictureUrl(picData, artistInd, articleInd ) {
+            const artists = picData?.artists;
+            if (artists && artists[artistInd]) {
+              const articles = artists[artistInd].articles;
+              if (articles && articles[articleInd]) {
+                return `${store.apiBase}storage/${articles[articleInd].operaPicture}`;
+              }
+            }
+            return ''; // Return a fallback image URL or an empty string if any property is missing
+          },
+          async getDatas() {
+            try {
+              const response = await axios.get(`${store.apiUrl}`);
+              this.picData = response.data.homePic;
+              store.dataReady = true;
+            } catch (error) {
+              console.error('Error fetching data:', error);
+            }
+          },
             
         },
-        mounted () {
+        async mounted () {
 
+            await this.getDatas();
             const listener = function(e){
                 e.preventDefault()
             }

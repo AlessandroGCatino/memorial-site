@@ -9,27 +9,27 @@
         </div> -->
         <div>
             <div class="col-12">
-                <h6 class="mb-2"><b>{{ store.infos[store.selected.section].exhibitions[store.selected.exhibition].artists[store.selected.artist].artistName }}</b></h6>
+                <h6 class="mb-2"><b>{{ store.infos[store.selected.section].exhibitions[store.selected.exhibition].artists[store.selected.artist]?.artistName }}</b></h6>
                 <h6><b>{{ store.infos[store.selected.section].exhibitions[store.selected.exhibition].expositionDates }}</b></h6>
-                <p class="artistDesc">{{ store.infos[store.selected.section].exhibitions[store.selected.exhibition].artists[store.selected.artist].artistDesc }}</p>
+                <p class="artistDesc">{{ store.infos[store.selected.section].exhibitions[store.selected.exhibition].artists[store.selected.artist]?.artistDesc }}</p>
             </div>
         </div>
         
         <div>
             <div class="col-12 text-center">
                 <figure>
-                    <img :src="`${store.apiBase}storage/${store.infos[store.selected.section].exhibitions[store.selected.exhibition].artists[store.selected.artist].articles[store.selected.article].operaPicture}`" alt="" class="w-100">
+                    <img v-if="store.infos[store.selected.section].exhibitions[store.selected.exhibition].artists[store.selected.artist]?.articles[store.selected.article]?.operaPicture" :src="`${store.apiBase}storage/${store.infos[store.selected.section].exhibitions[store.selected.exhibition].artists[store.selected.artist]?.articles[store.selected.article]?.operaPicture}`" alt="" class="w-100">
                 </figure>
             </div>
             <div class="col-12 description">
-                <h6 class="mb-3"><b>{{ store.infos[store.selected.section].exhibitions[store.selected.exhibition].artists[store.selected.artist].articles[store.selected.article].operaName }}</b>, <b>{{ store.infos[store.selected.section].exhibitions[store.selected.exhibition].artists[store.selected.artist].artistName }}</b></h6>
-                <h6 class="mb-3"><b>{{ store.infos[store.selected.section].exhibitions[store.selected.exhibition].artists[store.selected.artist].articles[store.selected.article].operaYear }}</b></h6>
-                <p class="artistDesc"><i>{{ store.infos[store.selected.section].exhibitions[store.selected.exhibition].artists[store.selected.artist].articles[store.selected.article].operaMaterial }}</i></p>
-                <p class="artistDesc">{{ store.infos[store.selected.section].exhibitions[store.selected.exhibition].artists[store.selected.artist].articles[store.selected.article].operaDescription }}</p>
+                <h6 v-if="store.infos[store.selected.section].exhibitions[store.selected.exhibition].artists[store.selected.artist]?.articles[store.selected.article]?.operaName && store.infos[store.selected.section].exhibitions[store.selected.exhibition]?.artists[store.selected.artist]?.artistName" class="mb-3"><b>{{ store.infos[store.selected.section].exhibitions[store.selected.exhibition].artists[store.selected.artist]?.articles[store.selected.article]?.operaName }}</b>, <b>{{ store.infos[store.selected.section].exhibitions[store.selected.exhibition]?.artists[store.selected.artist]?.artistName }}</b></h6>
+                <h6 class="mb-3"><b>{{ store.infos[store.selected.section].exhibitions[store.selected.exhibition]?.artists[store.selected.artist]?.articles[store.selected.article]?.operaYear }}</b></h6>
+                <p class="artistDesc"><i>{{ store.infos[store.selected.section].exhibitions[store.selected.exhibition]?.artists[store.selected.artist]?.articles[store.selected.article]?.operaMaterial }}</i></p>
+                <p class="artistDesc">{{ store.infos[store.selected.section].exhibitions[store.selected.exhibition]?.artists[store.selected.artist]?.articles[store.selected.article]?.operaDescription }}</p>
             </div>
 
             <div class="photo-galery-with-zoom">
-                <figure v-for="items in store.infos[store.selected.section].exhibitions[store.selected.exhibition].artists[store.selected.artist].articles[store.selected.article].pictures" :key="items.singlePicture">
+                <figure v-for="items in store.infos[store.selected.section].exhibitions[store.selected.exhibition]?.artists[store.selected.artist]?.articles[store.selected.article]?.pictures" :key="items.singlePicture">
                     <input type="checkbox" name="galery" onclick="bigImage(event);"/>
                     <img :src="`${store.apiBase}storage/${items.singlePicture}`" alt="">
                 </figure>
