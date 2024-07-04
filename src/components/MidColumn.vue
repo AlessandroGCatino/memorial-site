@@ -1,13 +1,13 @@
 <template>
-    <div :class="!isDisplayed ? 'd-none d-lg-flex':''" class="mg-sidebar">
+    <div :class="!isDisplayed ? 'd-none d-md-flex':''" class="mg-sidebar">
 
         <div class="content">
 
             <div v-if="store.dataReady" v-for="(artists, index) in store.infos[store.selected.section]?.exhibitions[store.selected.exhibition]?.artists" :key="artists.id">
                 <figure v-for="article,pos in artists.articles" :key="article.id" class="w-100">
-                    <a>
+                    <RouterLink :to="{ name: 'article', params: { exhibition: exhibition.slug, article: article.slug } }">
                         <img :src="`${store.apiBase}storage/${article.operaPicture}`" @click="handleArticleClick(index, pos)" alt="">
-                    </a>
+                    </RouterLink>
                 </figure>
             </div>
         </div>
@@ -15,6 +15,7 @@
 </template>
 
 <script>
+import { RouterLink } from 'vue-router';
 import { store } from '../store';
 
 export default {
