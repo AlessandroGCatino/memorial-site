@@ -23,9 +23,9 @@
                 <div :class="!showNavbar ? 'd-none d-md-flex':''" class="d-flex flex-column flex-md-row col-12 col-md-6 justify-content-between menu-section position-relative">
                     <div class="default-padding d-flex align-items-start align-items-md-center">
                         <div class="left-space"></div>
-                        <RouterLink :to="{ name: 'home' }" @click="changehcnActive()">
+                        <a href="https://holocaustcentrenorth.org.uk/">
                             <h6>Holocaust Centre North</h6>
-                        </RouterLink>
+                        </a>
                         <div class="right-space"></div>
                     </div>
                     <div class="default-padding" id="top-definer">
