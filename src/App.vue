@@ -2,8 +2,11 @@
     <div class="frame">
         <div class="external-frame">
             <div class="d-flex flex-column flex-md-row">
-                <div class="col-12 col-md-3 default-padding d-flex align-items-start align-items-md-center justify-content-between menu-section position-relative border-right">
+                <div class="col-12 col-md-3 default-padding d-flex align-items-start align-items-center menu-section position-relative border-right">
                     <div class="left-space"></div>
+                    <RouterLink :to="{ name: 'home' }" @click="changehcnActive()">
+                    <div class="roundedcircle"></div>
+                    </RouterLink>
                     <RouterLink :to="{ name: 'homepage' }" @click="changeBaseState()">
                         <h6>Memorial Gestures</h6>
                     </RouterLink>
@@ -243,6 +246,15 @@ figure {
     .menu-section-bot {
         border-top: 1px solid black;
     }
+}
+
+.roundedcircle{
+    border-radius: 50%;
+    width: 15px;
+    height: 15px;
+    background-color: black;
+    vertical-align: middle;
+    margin-right: 15px;
 }
 
 .frame {
