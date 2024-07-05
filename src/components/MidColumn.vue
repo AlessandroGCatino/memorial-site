@@ -1,9 +1,9 @@
 <template>
     <div :class="!isDisplayed ? 'd-none d-md-flex':''" class="mg-sidebar">
         <div class="content">
-            <div v-if="dataReady" v-for="(artists) in exhibition?.artists" :key="artists.id">
-                <figure v-for="article in artists.articles" :key="article.id" class="w-100">
-                    <RouterLink :to="{ name: 'article', params: { exhibition: exhibitionSlug, article: article.slug } }">
+            <div v-if="dataReady" v-for="(artists, index) in exhibition?.artists" :key="artists.id">
+                <figure v-for="(article, pos) in artists.articles" :key="article.id" class="w-100" @click="handleArticleClick(index, pos)">
+                    <RouterLink :to="{ name: 'article', params: { exhibition: exhibitionSlug, article: article.slug }}">
                         <img :src="`${store.apiBase}storage/${article.operaPicture}`" alt="">
                     </RouterLink>
                 </figure>
@@ -51,7 +51,6 @@ export default {
         },
         setExhibition() {
             this.exhibitionSlug = this.$route?.params?.exhibition
-            console.log(this.exhibitionSlug)
         },
         searchActiveExhibition(){
             for (let section=0; section<store.infos.length; section++) {
@@ -65,12 +64,18 @@ export default {
         handleLoading(){
             this.setExhibition()
             this.exhibition = this.searchActiveExhibition();
+            this.checkURL();
             this.dataReady = true;
         },
         refreshPage(){
             let timer = setTimeout( () => {
                 this.handleLoading();
                 }, 1000);
+        },
+        checkURL(){
+            if (this.$route.params.article){
+                this.handleArticleClick(0,0)
+            }
         }
     },
     mounted (){
@@ -87,7 +92,6 @@ export default {
         this.$watch(
         () => store.infos,
         (newInfos, oldInfos) => {
-            console.log('store.infos è cambiato!', newInfos);
             this.handleLoading()
         },
         { deep: true }

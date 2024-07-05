@@ -54,7 +54,6 @@ export default {
                 // console.log("Intero array: ", store.infos);
                 // console.log("Exhibition: ", store.infos[0].exhibitions)
                 // console.log("Open Call: ", store.openCall);
-                console.log(store.infos)
                 store.dataReady = true
                 // console.log(store.infos[store.selected.section].exhibitions[store.selected.exhibition])
             });

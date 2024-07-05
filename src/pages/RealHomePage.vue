@@ -32,7 +32,6 @@ export default {
             try {
                 const response = await axios.get(`${store.apiUrl}`);
                 this.picData = response.data.homePic;
-                console.log(this.picData);
                 store.dataReady = true;
             } catch (error) {
                 console.error('Error fetching data:', error);
@@ -133,6 +132,7 @@ export default {
     position: static;
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 .screen-container{
     height: calc(100% - 15px);

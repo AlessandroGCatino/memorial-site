@@ -54,7 +54,7 @@ export default {
         },
         checkURL(){
             if (Object.keys(this.$route.params).length > 0){
-                this.changeCurrentArticle(0,0)
+                this.handleArticleClick(0,0)
             }
         }
         // refreshPage(){

@@ -85,7 +85,6 @@ export default {
         },
         setArticle(){
             this.articleSlug = this.$route?.params?.article
-            console.log(this.articleSlug)
         },
         searchActiveArticle(){
             for (let section=0; section<store.infos.length; section++) {
@@ -106,9 +105,6 @@ export default {
             this.exhibition = this.searchActiveExhibition();
             this.setArticle()
             this.article = this.searchActiveArticle()
-            console.log("Exhibition: " + this.exhibition)
-            console.log("Article: " + this.article)
-            console.log("Artist", this.artist)
             this.dataReady = true;
         },
         refreshPage(){
