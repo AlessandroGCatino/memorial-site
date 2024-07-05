@@ -144,9 +144,6 @@
                 store.selected.artist = 0;
             },
             
-        },
-        mounted() {
-            console.log(this.$route)
         }
     }
 </script>
