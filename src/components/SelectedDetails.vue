@@ -9,27 +9,27 @@
         </div> -->
         <div>
             <div class="col-12">
-                <h6 class="mb-2"><b>{{ store.infos[store.selected.section].exhibitions[store.selected.exhibition].artists[store.selected.artist]?.artistName }}</b></h6>
-                <h6><b>{{ store.infos[store.selected.section].exhibitions[store.selected.exhibition].expositionDates }}</b></h6>
-                <p class="artistDesc">{{ store.infos[store.selected.section].exhibitions[store.selected.exhibition].artists[store.selected.artist]?.artistDesc }}</p>
+                <h6 class="mb-2"><b>{{ artist?.artistName }}</b></h6>
+                <h6><b>{{ exhibition?.expositionDates }}</b></h6>
+                <p class="artistDesc">{{ artist?.artistDesc }}</p>
             </div>
         </div>
         
         <div>
             <div class="col-12 text-center">
                 <figure>
-                    <img v-if="store.infos[store.selected.section].exhibitions[store.selected.exhibition].artists[store.selected.artist]?.articles[store.selected.article]?.operaPicture" :src="`${store.apiBase}storage/${store.infos[store.selected.section].exhibitions[store.selected.exhibition].artists[store.selected.artist]?.articles[store.selected.article]?.operaPicture}`" alt="" class="w-100">
+                    <img v-if="article?.operaPicture" :src="`${store.apiBase}storage/${article?.operaPicture}`" alt="" class="w-100">
                 </figure>
             </div>
             <div class="col-12 description">
-                <h6 v-if="store.infos[store.selected.section].exhibitions[store.selected.exhibition].artists[store.selected.artist]?.articles[store.selected.article]?.operaName && store.infos[store.selected.section].exhibitions[store.selected.exhibition]?.artists[store.selected.artist]?.artistName" class="mb-3"><b>{{ store.infos[store.selected.section].exhibitions[store.selected.exhibition].artists[store.selected.artist]?.articles[store.selected.article]?.operaName }}</b>, <b>{{ store.infos[store.selected.section].exhibitions[store.selected.exhibition]?.artists[store.selected.artist]?.artistName }}</b></h6>
-                <h6 class="mb-3"><b>{{ store.infos[store.selected.section].exhibitions[store.selected.exhibition]?.artists[store.selected.artist]?.articles[store.selected.article]?.operaYear }}</b></h6>
-                <p class="artistDesc"><i>{{ store.infos[store.selected.section].exhibitions[store.selected.exhibition]?.artists[store.selected.artist]?.articles[store.selected.article]?.operaMaterial }}</i></p>
-                <p class="artistDesc">{{ store.infos[store.selected.section].exhibitions[store.selected.exhibition]?.artists[store.selected.artist]?.articles[store.selected.article]?.operaDescription }}</p>
+                <h6 v-if="article?.operaName && artist?.artistName" class="mb-3"><b>{{ article?.operaName }}</b>, <b>{{ artist?.artistName }}</b></h6>
+                <h6 class="mb-3"><b>{{ article?.operaYear }}</b></h6>
+                <p class="artistDesc"><i>{{ article?.operaMaterial }}</i></p>
+                <p class="artistDesc">{{ article?.operaDescription }}</p>
             </div>
 
             <div class="photo-galery-with-zoom">
-                <figure v-for="items in store.infos[store.selected.section].exhibitions[store.selected.exhibition]?.artists[store.selected.artist]?.articles[store.selected.article]?.pictures" :key="items.singlePicture">
+                <figure v-for="items in article?.pictures" :key="items.singlePicture">
                     <input type="checkbox" name="galery" onclick="bigImage(event);"/>
                     <img :src="`${store.apiBase}storage/${items.singlePicture}`" alt="">
                 </figure>
@@ -56,6 +56,12 @@ export default {
     data () {
         return {
             store,
+            exhibitionSlug: null,
+            exhibition: null,
+            dataReady: false,
+            articleSlug: null,
+            article:null,
+            artist:null
         }
     },
     methods:{
@@ -64,13 +70,71 @@ export default {
         },
         bigImage(event){
             event.stopPropagation();
+        },
+        setExhibition() {
+            this.exhibitionSlug = this.$route?.params?.exhibition
+        },
+        searchActiveExhibition(){
+            for (let section=0; section<store.infos.length; section++) {
+                for (let exhibition=0; exhibition<store.infos[section].exhibitions.length; exhibition++) {
+                    if (store.infos[section].exhibitions[exhibition].slug === this.exhibitionSlug) {
+                        return store.infos[section].exhibitions[exhibition];
+                    }
+                }
+            }
+        },
+        setArticle(){
+            this.articleSlug = this.$route?.params?.article
+            console.log(this.articleSlug)
+        },
+        searchActiveArticle(){
+            for (let section=0; section<store.infos.length; section++) {
+                for (let exhibition=0; exhibition<store.infos[section].exhibitions.length; exhibition++) {
+                    for (let artist=0; artist<store.infos[section].exhibitions[exhibition].artists.length; artist++) {
+                        for (let article=0; article<store.infos[section].exhibitions[exhibition].artists[artist].articles.length; article++) {
+                            if (store.infos[section].exhibitions[exhibition].artists[artist].articles[article].slug === this.articleSlug) {
+                                this.artist = store.infos[section].exhibitions[exhibition].artists[artist]
+                                return store.infos[section].exhibitions[exhibition].artists[artist].articles[article];
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        handleLoading(){
+            this.setExhibition()
+            this.exhibition = this.searchActiveExhibition();
+            this.setArticle()
+            this.article = this.searchActiveArticle()
+            console.log("Exhibition: " + this.exhibition)
+            console.log("Article: " + this.article)
+            console.log("Artist", this.artist)
+            this.dataReady = true;
+        },
+        refreshPage(){
+            let timer = setTimeout( () => {
+                this.handleLoading();
+                }, 1000);
         }
     },
-    watch: {
-    
+    mounted (){
+        this.refreshPage() // refresh page after 5 seconds to ensure exhibition data is fetched before rendering the component
+           
     },
-    mounted () {
-        
+    created() {
+        this.$watch(
+        () => this.$route.params.article,
+        (newId, oldId) => {
+            this.handleLoading()
+        }
+        );
+        this.$watch(
+        () => store.infos,
+        (newInfos, oldInfos) => {
+            this.handleLoading()
+        },
+        { deep: true }
+        );
     },
 }
 </script>

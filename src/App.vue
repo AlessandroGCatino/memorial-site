@@ -12,33 +12,7 @@
                     </h6>
                     <div class="right-space"></div>
                 </div>
-                <!-- <div class="collapse" :class="showNavbar ? 'd-none':''" id="hamburger">
-                    <div class="col-12 col-md-3 default-padding d-flex align-items-start align-items-md-center menu-section position-relative border-right">
-                    <div class="left-space"></div>
-                    <RouterLink :to="{ name: 'homepage' }" @click="changehcnActive()">
-                        <h6 @click="changehcnActive()">About Us</h6>
-                    </RouterLink>
-                    <div class="right-space"></div>
-                    </div>
-                    <div class="d-flex flex-column flex-md-row col-12 col-md-6 justify-content-between menu-section position-relative">
-                        <div class="default-padding d-flex align-items-start align-items-md-center">
-                            <div class="left-space"></div>
-                            <RouterLink :to="{ name: 'home' }" @click="changehcnActive()">
-                                <h6>Holocaust Centre North</h6>
-                            </RouterLink>
-                            <div class="right-space"></div>
-                        </div>
-                        <div class="default-padding" id="top-definer">
-                            <div class="left-space"></div>
-                            <div class="bg-black">
-                                <RouterLink :to="{ name: 'homepage' }">
-                                    <h6 @click="changeOpencallActive()" class="text-white">OPEN CALL</h6>
-                                </RouterLink>
-                            </div>
-                            <div class="right-space"></div>
-                        </div>
-                    </div>
-                </div> -->
+                
                 <div :class="!showNavbar ? 'd-none d-md-flex':''" class="col-12 col-md-3 default-padding d-flex align-items-start align-items-md-center menu-section position-relative border-right">
                     <div class="left-space"></div>
                     <RouterLink :to="{ name: 'homepage' }" @click="changehcnActive()">

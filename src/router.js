@@ -15,6 +15,16 @@ const router = createRouter({
             path:"/home",
             name: "homepage",
             component: HomePage
+        },
+        {
+            path:"/home/:exhibition",
+            name: "exhibition",
+            component: HomePage
+        },
+        {
+            path:"/home/:exhibition/:article",
+            name: "article",
+            component: HomePage
         }
     ]
 })

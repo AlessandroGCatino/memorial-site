@@ -1,11 +1,11 @@
 <template>
-    <div :class="!isDisplayed ? 'd-none d-lg-flex':''" class="mg-midcontent">
+    <div :class="!isDisplayed ? 'd-none d-md-flex':''" class="mg-midcontent">
         
         <div class="content">
             <div v-if="store.openCallActive && store.openCall?.exhibitions[0]?.artists[0]?.articles[0]">
 
                 <div class="col-12">
-                    <figure id="artistImage" ref="artistImage" class="w-100 text-center ">
+                    <figure id="artistImage" ref="artistImage" class="w-100 text-center">
                         <img :src="`${store.apiBase}storage/${store.openCall.exhibitions[0].artists[0].articles[0].operaPicture}`" @load="scrollToImage" alt="" class="w-100">
                     </figure>
                 </div>

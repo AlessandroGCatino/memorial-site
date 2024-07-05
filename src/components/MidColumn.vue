@@ -1,12 +1,10 @@
 <template>
     <div :class="!isDisplayed ? 'd-none d-md-flex':''" class="mg-sidebar">
-
         <div class="content">
-
-            <div v-if="store.dataReady" v-for="(artists, index) in store.infos[store.selected.section]?.exhibitions[store.selected.exhibition]?.artists" :key="artists.id">
-                <figure v-for="article,pos in artists.articles" :key="article.id" class="w-100">
-                    <RouterLink :to="{ name: 'article', params: { exhibition: exhibition.slug, article: article.slug } }">
-                        <img :src="`${store.apiBase}storage/${article.operaPicture}`" @click="handleArticleClick(index, pos)" alt="">
+            <div v-if="dataReady" v-for="(artists) in exhibition?.artists" :key="artists.id">
+                <figure v-for="article in artists.articles" :key="article.id" class="w-100">
+                    <RouterLink :to="{ name: 'article', params: { exhibition: exhibitionSlug, article: article.slug } }">
+                        <img :src="`${store.apiBase}storage/${article.operaPicture}`" alt="">
                     </RouterLink>
                 </figure>
             </div>
@@ -29,7 +27,11 @@ export default {
     data () {
         return {
             store,
-            show: false
+            show: false,
+            exhibitionSlug: null,
+            exhibition: null,
+            article: null,
+            dataReady: false
         }
     },
     methods: {
@@ -47,16 +49,50 @@ export default {
             this.changeCurrentArtist(artist, article);
             this.$emit('changeToContent');
         },
+        setExhibition() {
+            this.exhibitionSlug = this.$route?.params?.exhibition
+            console.log(this.exhibitionSlug)
+        },
+        searchActiveExhibition(){
+            for (let section=0; section<store.infos.length; section++) {
+                for (let exhibition=0; exhibition<store.infos[section].exhibitions.length; exhibition++) {
+                    if (store.infos[section].exhibitions[exhibition].slug === this.exhibitionSlug) {
+                        return store.infos[section].exhibitions[exhibition];
+                    }
+                }
+            }
+        },
+        handleLoading(){
+            this.setExhibition()
+            this.exhibition = this.searchActiveExhibition();
+            this.dataReady = true;
+        },
         refreshPage(){
             let timer = setTimeout( () => {
-                this.changeCurrentArtist(0,0)
-                }, 500);
+                this.handleLoading();
+                }, 1000);
         }
-        
     },
-    mounted() {
-        this.refreshPage()
-    }
+    mounted (){
+        this.refreshPage() // refresh page after 5 seconds to ensure exhibition data is fetched before rendering the component
+           
+    },
+    created() {
+        this.$watch(
+        () => this.$route.params.exhibition,
+        (newId, oldId) => {
+            this.handleLoading()
+        }
+        );
+        this.$watch(
+        () => store.infos,
+        (newInfos, oldInfos) => {
+            console.log('store.infos è cambiato!', newInfos);
+            this.handleLoading()
+        },
+        { deep: true }
+        );
+    },
 }
 </script>
 

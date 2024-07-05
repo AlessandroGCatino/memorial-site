@@ -1,15 +1,15 @@
 <template>
-    <div :class="!isDisplayed ? 'd-none d-lg-flex':''" class="mg-sidebar">
+    <div :class="!isDisplayed ? 'd-none d-md-flex':''" class="mg-sidebar">
         
         <div class="content">
             <div class="scrollable">
 
                 <div class="sections mb-2 " v-for="(element, indice) in store.infos">
-                    <h6 data-bs-toggle="collapse" :data-bs-target="`#collapse${indice}`" :aria-expanded="element.name == 'Exhibitions'?'true':'false'" :aria-controls="`#collapse${indice}`"><strong>{{ element.name }}</strong></h6>
-                    <div :class="element.name == 'Exhibitions'?'collapse.show':'collapse'" :id="`collapse${indice}`">
+                    <h6 data-bs-toggle="collapse" :data-bs-target="`#collapse${indice}`" aria-expanded="false" :aria-controls="`#collapse${indice}`"><strong>{{ element.name }}</strong></h6>
+                    <div class="collapse" :id="`collapse${indice}`">
 
                         <div v-for="(item, index) in element.exhibitions" :key="item.id">
-                            <span @click="handleArticleClick(indice, index)">{{ item.title }}</span>
+                            <span @click="handleArticleClick(indice, index)"><RouterLink :to="{ name: 'exhibition', params: { exhibition: item.slug } }">{{ item.title }}</RouterLink></span>
                         </div>
                     </div>
                 </div>
@@ -22,6 +22,7 @@
 </template>
 
 <script>
+import { RouterLink } from 'vue-router';
 import { store } from '../store';
 
 export default {
@@ -51,14 +52,20 @@ export default {
             this.changeCurrentArticle(sectionid, exhibitionid);
             this.$emit('changeToMid');
         },
-        refreshPage(){
-            let timer = setTimeout( () => {
+        checkURL(){
+            if (Object.keys(this.$route.params).length > 0){
                 this.changeCurrentArticle(0,0)
-                }, 500);
+            }
         }
+        // refreshPage(){
+        //     let timer = setTimeout( () => {
+        //         this.changeCurrentArticle(0,0)
+        //         }, 500);
+        // }
     },
     mounted () {
-        this.refreshPage();
+        // this.refreshPage();
+        this.checkURL()
     },
 }
 </script>
