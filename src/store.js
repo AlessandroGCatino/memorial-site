@@ -13,10 +13,11 @@ export const store = reactive({
     displayContent: false,
 
 
-    apiUrl: 'https://api.memorialgestures.org.uk/api/memorial-gestures',
-    apiBase: 'https://api.memorialgestures.org.uk/',
+    apiUrl: 'http://127.0.0.1:8000/api/memorial-gestures',
+    apiBase: 'http://127.0.0.1:8000/',
     infos:[],
     openCall:[],
+    AboutPage:[],
     
     dataReady: false,
     openCallActive:false,

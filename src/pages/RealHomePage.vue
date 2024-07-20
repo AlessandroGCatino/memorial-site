@@ -2,7 +2,10 @@
     <div class="screen-container d-flex flex-wrap">
         <div v-if="store.dataReady" v-for="(singlePic, index) in picData" :key="index" :ref="'move' + index" :style="{ top: singlePic.yAxis + '%', left: singlePic.xAxis + '%', zIndex: singlePic.layer }" class="moving-objects">
             <a :href="singlePic.linksTo">
-                <figure :style="{width: singlePic.width, height: singlePic.height}">
+                <div class="roundedcircle2">
+                </div>
+                <iframe v-if="singlePic.selectedMode=='video'" :style="{width: singlePic.width +  'px', height: singlePic.height + 'px'}" :src="singlePic.videoUrl" ></iframe>
+                <figure v-else :style="{width: singlePic.width, height: singlePic.height}">
                     <img :src="`${store.apiBase}storage/${singlePic.imagePic}`" alt="" :style="{width: singlePic.width +  'px', height: singlePic.height + 'px'}">
                 </figure>
             </a>
@@ -120,12 +123,22 @@ export default {
     }
 }
 
-// .moving{
-//     position: absolute;
-//     left: 0;
-//     top: 0;
-// }
-
+.roundedcircle2{
+    border-top-left-radius: 50%;
+    border-top-right-radius: 50%;
+    width: 7px;
+    height: 7px;
+    padding: 7px;
+    background-color: lightblue;
+    vertical-align: middle;
+    margin-right: 15px;
+    .fa-solid{
+        color: white;
+        fill: white;
+        font-weight: 900;
+        font-size: 12px;
+    }
+}
 @media (max-width: 768px) {
 
 .moving-objects{

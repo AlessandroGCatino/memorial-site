@@ -10,15 +10,18 @@
                     <RouterLink :to="{ name: 'homepage' }" @click="changeBaseState()">
                         <h6>Memorial Gestures</h6>
                     </RouterLink>
-                    <h6 class="d-md-none hamburger" :class="showNavbar ? 'd-none':''" @click="hamburgerMenu()">
-                    +
-                    </h6>
+                    <div class="ms-auto">
+                        <h6 class="d-md-none hamburger" :class="showNavbar ? 'd-none':''" @click="hamburgerMenu()">
+                            +
+                        </h6>
+                    </div>
+                    
                     <div class="right-space"></div>
                 </div>
                 
                 <div :class="!showNavbar ? 'd-none d-md-flex':''" class="col-12 col-md-3 default-padding d-flex align-items-start align-items-md-center menu-section position-relative border-right">
                     <div class="left-space"></div>
-                    <RouterLink :to="{ name: 'homepage' }" @click="changehcnActive()">
+                    <RouterLink :to="{ name: 'about' }" @click="changehcnActive()">
                         <h6 @click="changehcnActive()">About Us</h6>
                     </RouterLink>
                     <div class="right-space"></div>

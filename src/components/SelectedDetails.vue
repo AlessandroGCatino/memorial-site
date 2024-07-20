@@ -17,7 +17,10 @@
         
         <div>
             <div class="col-12 text-center">
-                <figure>
+                <div v-if="article?.videoUrl !== null">
+                    <iframe   :src="article?.videoUrl" ></iframe>
+                </div>
+                <figure v-else>
                     <img v-if="article?.operaPicture" :src="`${store.apiBase}storage/${article?.operaPicture}`" alt="" class="w-100">
                 </figure>
             </div>
@@ -105,6 +108,7 @@ export default {
             this.exhibition = this.searchActiveExhibition();
             this.setArticle()
             this.article = this.searchActiveArticle()
+            console.log(this.article)
             this.dataReady = true;
         },
         refreshPage(){
@@ -136,6 +140,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+iframe {
+    width: 100%;
+    aspect-ratio: 16/9;
+}
 
 p{
     font: 17px/20px Times;

@@ -51,6 +51,8 @@ export default {
             axios.get(`${store.apiUrl}`).then(response => {
                 store.infos = response.data.sections;
                 store.openCall = response.data.openCall;
+                store.AboutPage = response.data.aboutUsPage
+                console.log(store.AboutPage)
                 // console.log("Intero array: ", store.infos);
                 // console.log("Exhibition: ", store.infos[0].exhibitions)
                 // console.log("Open Call: ", store.openCall);

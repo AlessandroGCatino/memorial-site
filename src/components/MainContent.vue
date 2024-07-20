@@ -17,14 +17,12 @@
             <div v-else-if="store.openCallActive">
                 No open call available! Stay tuned on our socials for more info.
             </div>
-            <div v-else-if="store.hcnActive" class="hcn">
-                <h6>Holocaust Centre North</h6>
-                <p>Holocaust Centre North is home to an exhibition, learning programme and archive, all of which tell the stories of Jewish survivors of the Holocaust who rebuilt their lives in the North of England. By ensuring that the atrocities of the Nazi genocide are never forgotten we seek to raise awareness of human rights, freedom and equality. Our educational, academic and artistic programming is shaped by a community-led approach, working in dialogue with survivors and their descendants. <br>
-                In Holocaust Centre North’s archive, you will find traces of: pre-war Jewish life & culture, forced displacement/migration, child refugees, trauma/intergenerational trauma, memory/post-memory, loss, internment, forced labour, survival & liberation, childhood & youth, diasporic identities, and making a new life in the North of England. We believe these traces of the past can help us to understand and amplify contemporary struggles and experiences. <br>
-                Our archival collection includes photographs, letters, legal documents, artefacts, textiles, ephemera & postcards, as well as an extensive collection of video & audio testimony with Holocaust survivors and their families. <br>
-                Our understanding of the Holocaust is constantly evolving. At Holocaust Centre North we believe that the Holocaust must be understood alongside other historical and contemporary events and conflicts. We encourage ongoing conversations about its meaning and legacy. We are committed to fostering a culture of care when talking about difficult and traumatic histories.</p>
-                <p>
-                Holocaust Centre North was founded in the mid-1990s by survivors with the aim of providing friendship and community support. Since 2018 we have had a permanent home on the University of Huddersfield campus. At every stage of our development, we continually return to the core values of bearing witness to the truth and showing solidarity with survivors. Visit our main website for more information and to find out how to visit our free exhibition.</p>
+            <div v-else-if="store.hcnActive && store.AboutPage" class="hcn">
+                <h6>{{ store.AboutPage[0]?.operaMaterial }}</h6>
+                <figure v-if="store?.AboutPage[0]?.operaPicture">
+                    <img :src="`${store.apiBase}storage/${store.AboutPage[0].operaPicture}`" alt="" class="w-100">
+                </figure>
+                <p>{{ store.AboutPage[0]?.operaDescription}}</p>
             </div>
             <div v-else class="scrollable" v-if="store.dataReady">
                 
@@ -77,6 +75,7 @@ export default {
         }
         p{
             font:20px/22px Times;
+            overflow-wrap: break-word;
         }
 
     }
