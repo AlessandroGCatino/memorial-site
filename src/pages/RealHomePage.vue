@@ -2,9 +2,11 @@
     <div class="screen-container d-flex flex-wrap">
         <div v-if="store.dataReady" v-for="(singlePic, index) in picData" :key="index" :ref="'move' + index" :style="{ top: singlePic.yAxis + '%', left: singlePic.xAxis + '%', zIndex: singlePic.layer }" class="moving-objects">
             <a :href="singlePic.linksTo">
-                <div class="roundedcircle2">
+                <div v-if="singlePic.selectedMode=='video'">
+                    <div class="roundedcircle2">
+                    </div>
+                    <iframe  :style="{width: singlePic.width +  'px', height: singlePic.height + 'px'}" :src="singlePic.videoUrl" ></iframe>
                 </div>
-                <iframe v-if="singlePic.selectedMode=='video'" :style="{width: singlePic.width +  'px', height: singlePic.height + 'px'}" :src="singlePic.videoUrl" ></iframe>
                 <figure v-else :style="{width: singlePic.width, height: singlePic.height}">
                     <img :src="`${store.apiBase}storage/${singlePic.imagePic}`" alt="" :style="{width: singlePic.width +  'px', height: singlePic.height + 'px'}">
                 </figure>
